@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2012-12-28T17:53:35+08:00</updated>
+  <updated>2012-12-28T19:31:07+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -132,23 +132,6 @@
 <pre><code>1. apiext.pdf //matlab external interface 
 2. mexguide.pdf 
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Test]]></title>
-    <link href="http://sleefd.github.com/blog/2012/12/28/test/"/>
-    <updated>2012-12-28T00:00:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2012/12/28/test</id>
-    <content type="html"><![CDATA[<p>﻿&#8212;
-layout: post
-title: &#8220;test&#8221;
-date: 2012-12-28 17:15
-comments: true</p>
-
-<h2>categories: </h2>
-
-<p>test&#8230;</p>
 ]]></content>
   </entry>
   
