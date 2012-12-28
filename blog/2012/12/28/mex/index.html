@@ -1,0 +1,256 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mex调用c代码备忘 - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。
+媒介：mex file 有约定俗成的格式，c源文件必须包括头文件 &#8220;mex.h&#8221;, 函数 mexFunction为入口函数. 当然也可以使用其他符合c语法的函数，头文件。
+关键： &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2012/12/28/mex/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Mex调用c代码备忘</h1>
+	<div class="entry-content"><ul>
+<li>目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。</li>
+<li>媒介：mex file
+  有约定俗成的格式，c源文件必须包括头文件 &#8220;mex.h&#8221;, 函数 mexFunction为入口函数.
+  当然也可以使用其他符合c语法的函数，头文件。</li>
+<li>关键： 各种数据类型在matlab和c之间的转换，传递。</li>
+</ul>
+
+
+<!-- more -->
+
+
+<ul>
+<li>mexFunction的签名为
+<code>
+  void mexFunction( int nlhs,
+   mxArray <em>plhs[],
+   int nrhs,
+   const mxArray </em>prhs[])
+</code>
+参数解释：
+  nlhs: 输出个数
+  nrhs: 输入参数的个数
+  plhs: 指向输出的指针数组
+  prhs: 指向输入的常指针数组</li>
+<li>数据类型：
+  matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。</li>
+<li>基本操作：mx/mex函数
+
+<pre><code>   1. *mx开头*的函数为对数据进行操作的函数.
+      记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以
+      set操作可能会改变workspace中的变量。
+   2. *mex开头*的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。
+</code></pre></li>
+</ul>
+
+
+<h4>代码示例</h4>
+
+<ul>
+<li>c从matlab获得数据
+  获取matrix:
+
+<pre><code>  double *p = mxGetPr(prhs[0]) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。
+  只要参数是matrix(m*n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~
+</code></pre>
+
+  获取维数：
+
+<pre><code>  `mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row &amp;&amp; column 数`
+</code></pre>
+
+<p>  获取cell数据类型：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for(int index = 0 ; index &lt; size  ; ++index)
+</span><span class='line'>      {
+</span><span class='line'>          mxArray * p = mxGetCell(prhs[0] , index); //得到index处的mexArray
+</span><span class='line'>          double *elem = mxGetPr(p);
+</span><span class='line'>      }</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>直接获取data（数值
+</code></pre>
+
+<p>`       double *data;</p>
+
+<pre><code>    data = mxGetData(prhs[0]);
+    //mxSetData(p1hs[0] , data);
+    `
+</code></pre>
+
+<ul>
+<li>c返回数据给matlab
+
+<pre><code>workspace输出：mexPrintf,类似c printf函数。  mexPrintf("%d\n" , number);
+               mexErrMsgTxt,打印error消息。 mexErrMsgTxt("This is an error message.");
+               mexEvalString,在workspace中调用string指定的命令。 mexEvalString("plot([1:5])"); //plot命令会被执行
+</code></pre>
+
+   想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。
+
+<pre><code>  分配空间的方法 1 plhs[0] = mxCreateDoubleMatrix(m,n,mxReal);
+                  double *data = mxGetPr(plhs[0]); //and then you can assign values to data.
+                 2 利用mxMalloc (用法类似c malloc
+                  double *data = mxMalloc(sizeof(double) * num);
+                      ... //assign values
+                  mxSetPr(prhs , data);
+</code></pre></li>
+<li>动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree
+
+<pre><code>       虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.
+</code></pre></li>
+</ul>
+
+
+<p>配置mex file编译环境在matlab中：</p>
+
+<pre><code>直接在命令行下输入 mex -setup 选择合适的编译器就ok了。
+</code></pre>
+
+<p>调试：可在VS中采用附加进程调试</p>
+
+<p>有价值的资料：</p>
+
+<pre><code>1. apiext.pdf //matlab external interface 
+2. mexguide.pdf 
+</code></pre>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2012
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleefd';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2012/12/28/mex/';
+        var disqus_url = 'http://sleefd.github.com/blog/2012/12/28/mex/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
