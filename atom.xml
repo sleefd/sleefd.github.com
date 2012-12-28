@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2012-12-28T22:08:37+08:00</updated>
+  <updated>2012-12-28T22:19:39+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -21,14 +21,7 @@
     <content type="html"><![CDATA[<ol>
 <li><p>bundle install时，ffi包装不上：</p>
 
-<p>将gemfile.lock文件中所有涉及到ffi版本好的地方都改为ffi (~>1.1.1)<a href="http://michael-roshen.iteye.com/blog/1613151">【参考】</a></p></li>
-</ol>
-
-
-<!--more-->
-
-
-<ol>
+<p>将gemfile.lock文件中所有涉及到ffi版本好的地方都改为ffi (~>1.1.1)<a href="http://michael-roshen.iteye.com/blog/1613151">【参考】</a><!--more--></p></li>
 <li><p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
 
 <ul>
@@ -58,7 +51,7 @@ self.content = File.read(File.join(base, name), :encoding => "UTF-8")
 <li><p>使用模版的方法：<br/>
 RTFM:一定要看模版说明
 通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p></li>
-<li><p>使用<!-- more -->来显示post中的部分内容。该标签后的所有内容将不被现实。</p></li>
+<li><p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被现实。</p></li>
 <li><p>配置disqus的方法：</p>
 
 <ul>
