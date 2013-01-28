@@ -81,8 +81,12 @@
 
 
 <p>问题定义：求pow(x,n)，其中n为正整数。
-解法一： 很直观的解法，每个人第一眼看到都会想到。将x乘以n次就ok嘛，一个for循环了事。时间复杂度O(n)。<br/>
-* 迭代求解</p>
+解法一： 很直观的解法，每个人第一眼看到都会想到。将x乘以n次就ok嘛，一个for循环了事。时间复杂度O(n)。</p>
+
+<ul>
+<li>迭代求解</li>
+</ul>
+
 
 <figure class='code'><figcaption><span>pow1.cpp </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -117,16 +121,17 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>解法二： pow(2 , 4)以解法一的话，需要做四次乘法，但是如果先计算2<em>2，再计算4</em>4,两次乘法ok，即log（n）次乘法。
-`if(n/2 == 0)</p>
+<p>解法二： pow(2 , 4)以解法一的话，需要做四次乘法，但是如果先计算2*2，再计算4*4,两次乘法ok，即log（n）次乘法。</p>
 
-<pre><code>pow(x,n) = square(pow(x , n/2));  
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if(n/2 == 0)
+</span><span class='line'>  pow(x,n) = square(pow(x , n/2));
+</span><span class='line'>if(n/2 == 1)
+</span><span class='line'>  pow(x,n) = x * pow(x,n-1)</span></code></pre></td></tr></table></div></figure>
 
-<p> if(n/2 == 1)</p>
-
-<pre><code>pow(x,n) = x * pow(x,n-1)`
-</code></pre>
 
 <ul>
 <li>递归解法</li>
@@ -192,31 +197,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>测试scaffolding:</p>
-
-<figure class='code'><figcaption><span>test.cpp </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define f pow  </span><span class="c1">//修改define，测试不同函数</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="c1">//f(2,-1),报错，源代码没有考虑n&lt;0的情况</span>
-</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class='line'><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
+<p>测试scaffolding:<br/>
+Liquid error: invalid byte sequence in GBK
+总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
 将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法，
 而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p>
 </div>
