@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming pearls | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/programming-pearls/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-01-28T10:09:03+08:00</updated>
+  <updated>2013-01-28T10:22:11+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -147,12 +147,13 @@
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div><br/>
 测试scaffolding:<br/>
-Liquid error: invalid byte sequence in GBK
-总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
-将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法，
-而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p></li>
+Liquid error: invalid byte sequence in GBK</p></li>
 </ul>
 
+
+<p>总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
+将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法，
+而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p>
 ]]></content>
   </entry>
   

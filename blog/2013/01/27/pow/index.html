@@ -197,9 +197,31 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>测试scaffolding:<br/>
-Liquid error: invalid byte sequence in GBK
-总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
+<p>测试scaffolding:</p>
+
+<figure class='code'><figcaption><span>test.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define f pow  </span><span class="c1">//修改define，测试不同函数</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//f(2,-1),报错，源代码没有考虑n&lt;0的情况 </span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
 将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法，
 而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p>
 </div>
