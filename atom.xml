@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-02-01T14:33:38+08:00</updated>
+  <updated>2013-02-27T22:11:01+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[编译安装第三方lib]]></title>
+    <link href="http://sleefd.github.com/blog/2013/02/27/use-third-library/"/>
+    <updated>2013-02-27T22:08:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2013/02/27/use-third-library</id>
+    <content type="html"><![CDATA[<h3>编译运行基本步骤</h3>
+
+<p>./comfigure  #生成makefile，configure文件一般是Linux下可执行脚本<br/>
+make  #编译<br/>
+make install #安装文件<br/>
+make uninstall #卸载文件</p>
+
+<h3>版本</h3>
+
+<p>source distribution 源代码版本。第三方库或软件的源代码，需要自己编译才能使用。<br/>
+源代码版本需要经过上述三个步骤才能执行。<br/>
+binary distribution 二进制版本即可执行版本，已编译好的，在特点平台上可直接运行安装的。</p>
+
+<h3>平台</h3>
+
+<p>windows下使用源代码版本的软件或库，需要自己写makefile，然后make,make install.平时我们使用复杂的IDE如visual studio等，可以直接编译运行，不需要
+自己写makefile，上述三个步骤已由IDE自己完成。</p>
+
+<p>linux下源码包以压缩包的形式存在，需先解压，然后cd到所在目录，再输入上述三个命令即可。
+注意阅读源码包中的readme和install文件。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在log(n)内求幂]]></title>
