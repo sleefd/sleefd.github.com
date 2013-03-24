@@ -1,0 +1,255 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>c++字符串分割 - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="文件解析，数据提取等都要用到字符串分割方法，笔试题也多有考到。 如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。 如将ip地址192.168.0.1解析成四段，可以如此写：
+sample.java 1
+2
+3
+4
+5
+6
+7
+8 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2013/03/24/str-split/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">C++字符串分割</h1>
+	<div class="entry-content"><p>文件解析，数据提取等都要用到字符串分割方法，笔试题也多有考到。</p>
+
+<p>如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。</p>
+
+<p>如将ip地址192.168.0.1解析成四段，可以如此写：</p>
+<!-- more --><figure class='code'><figcaption><span>sample.java</span></figcaption>
+ <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class='n'>Sanner</span> <span class='n'>in</span> <span class='o'>=</span> <span class='k'>new</span> <span class='n'>Scanner</span><span class='o'>(</span><span class='s'>&quot;in.txt&quot;</span><span class='o'>);</span>
+</span><span class='line'><span class='k'>while</span><span class='o'>(</span><span class='n'>in</span><span class='o'>.</span><span class='na'>hasNextLine</span><span class='o'>())</span>
+</span><span class='line'><span class='o'>{</span>
+</span><span class='line'>    <span class='n'>String</span> <span class='n'>line</span> <span class='o'>=</span> <span class='n'>in</span><span class='o'>.</span><span class='na'>nextLine</span><span class='o'>();</span>
+</span><span class='line'>    <span class='n'>StringTokenizer</span> <span class='n'>st</span> <span class='o'>=</span> <span class='k'>new</span> <span class='n'>StringTokenizer</span><span class='o'>(</span><span class='n'>line</span> <span class='o'>,</span> <span class='s'>&quot;,&quot;</span><span class='o'>);</span>
+</span><span class='line'>    <span class='k'>while</span><span class='o'>(</span><span class='n'>st</span><span class='o'>.</span><span class='na'>haxNext</span><span class='o'>())</span>
+</span><span class='line'>    <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>print</span><span class='o'>(</span><span class='n'>st</span><span class='o'>.</span><span class='na'>next</span><span class='o'>()</span> <span class='o'>+</span> <span class='s'>&quot; &quot;</span><span class='o'>);</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'>    <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>println</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>);</span>
+</span><span class='line'><span class='o'>}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>如果是用c++的话，有以下三种做法：</p>
+
+<ol>
+<li>
+<p>使用cstring头文件中的strtok函数</p>
+<figure class='code'><figcaption><span>split1.cpp</span></figcaption>
+<div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>char</span> <span class='n'>line</span><span class='p'>[</span><span class='mi'>20</span><span class='p'>];</span>
+</span><span class='line'>	<span class='kt'>char</span> <span class='n'>delim</span><span class='p'>[]</span> <span class='o'>=</span> <span class='err'>“</span><span class='p'>,</span><span class='err'>”</span><span class='p'>;</span>
+</span><span class='line'>	<span class='k'>while</span><span class='p'>(</span><span class='n'>gets</span><span class='p'>(</span><span class='n'>line</span><span class='p'>))</span>
+</span><span class='line'>	<span class='p'>{</span>
+</span><span class='line'>		<span class='kt'>char</span> <span class='o'>*</span><span class='n'>p</span> <span class='o'>=</span> <span class='nb'>NULL</span><span class='p'>;</span>
+</span><span class='line'>		<span class='n'>p</span> <span class='o'>=</span> <span class='n'>strtok</span><span class='p'>(</span><span class='n'>line</span><span class='p'>,</span> <span class='n'>delim</span> <span class='p'>);</span>
+</span><span class='line'>		<span class='k'>while</span><span class='p'>(</span><span class='n'>p</span><span class='o'>!=</span><span class='nb'>NULL</span><span class='p'>)</span>
+</span><span class='line'>		<span class='p'>{</span>
+</span><span class='line'>			<span class='n'>cout</span> <span class='o'>&lt;&lt;</span> <span class='n'>p</span> <span class='o'>&lt;&lt;</span> <span class='n'>endl</span><span class='p'>;</span>
+</span><span class='line'>			<span class='n'>p</span> <span class='o'>=</span> <span class='n'>strtok</span><span class='p'>(</span><span class='nb'>NULL</span><span class='p'>,</span><span class='n'>delim</span><span class='p'>);</span>
+</span><span class='line'>		<span class='p'>}</span>
+</span><span class='line'>	<span class='p'>}</span>
+</span></code></pre></td></tr></table></div></figure></li>
+
+<li>
+<p>使用stdio.h中的sscanf</p>
+<figure class='code'><figcaption><span>split2.cpp</span></figcaption>
+<div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>int</span> <span class='n'>a</span><span class='p'>,</span><span class='n'>b</span><span class='p'>,</span><span class='n'>c</span><span class='p'>;</span>
+</span><span class='line'>	<span class='n'>sscanf</span><span class='p'>(</span><span class='n'>line</span><span class='p'>,</span> <span class='s'>&quot;%d.%d.%d&quot;</span> <span class='p'>,</span><span class='o'>&amp;</span><span class='n'>a</span> <span class='p'>,</span> <span class='o'>&amp;</span><span class='n'>b</span> <span class='p'>,</span><span class='o'>&amp;</span><span class='n'>c</span><span class='p'>);</span>
+</span><span class='line'>	
+</span></code></pre></td></tr></table></div></figure></li>
+</ol>
+
+<p>sscanf和sprintf是非常有用的函数，应该善用。<br />3. 使用strstr()或strchr()或substr()函数<br />用这些函数显然是通过寻找delim出现的位置，来分隔字符串。对delim是单个字符的就比较好写了，多个字符很麻烦吧。<br />还是以解析ip地址为例:</p>
+<figure class='code'><figcaption><span>split3.cpp</span></figcaption>
+ <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>char</span> <span class='n'>line</span><span class='p'>[</span><span class='mi'>20</span><span class='p'>]</span> <span class='o'>=</span> <span class='s'>&quot;192.168.1&quot;</span><span class='p'>;</span>
+</span><span class='line'>	<span class='kt'>char</span> <span class='n'>part</span><span class='p'>[</span><span class='mi'>10</span><span class='p'>];</span>
+</span><span class='line'>
+</span><span class='line'>	<span class='kt'>char</span> <span class='o'>*</span><span class='n'>start</span> <span class='o'>=</span> <span class='n'>line</span><span class='p'>;</span>
+</span><span class='line'>	<span class='kt'>char</span> <span class='o'>*</span><span class='n'>p</span> <span class='p'>;</span>
+</span><span class='line'>	<span class='kt'>int</span> <span class='n'>len</span> <span class='o'>=</span> <span class='n'>strlen</span><span class='p'>(</span><span class='n'>line</span><span class='p'>);</span>
+</span><span class='line'>	<span class='n'>line</span><span class='p'>[</span><span class='n'>len</span><span class='p'>]</span> <span class='o'>=</span> <span class='sc'>&#39;.&#39;</span><span class='p'>;</span> <span class='c1'>//字符串最后补一个delim，方便后面操作</span>
+</span><span class='line'>	<span class='k'>while</span><span class='p'>((</span><span class='n'>p</span> <span class='o'>=</span> <span class='n'>strstr</span><span class='p'>(</span><span class='n'>start</span><span class='p'>,</span><span class='s'>&quot;.&quot;</span><span class='p'>))</span><span class='o'>!=</span><span class='nb'>NULL</span><span class='p'>)</span>
+</span><span class='line'>	<span class='p'>{</span>
+</span><span class='line'>		 <span class='n'>len</span> <span class='o'>=</span> <span class='n'>p</span> <span class='o'>-</span><span class='n'>start</span><span class='p'>;</span>
+</span><span class='line'>		 <span class='n'>strncpy</span><span class='p'>(</span><span class='n'>part</span><span class='p'>,</span><span class='n'>start</span><span class='p'>,</span> <span class='n'>len</span><span class='p'>);</span>
+</span><span class='line'>		 <span class='n'>part</span><span class='p'>[</span><span class='n'>len</span><span class='p'>]</span> <span class='o'>=</span> <span class='sc'>&#39;\0&#39;</span><span class='p'>;</span>  <span class='c1'>//strncpy不会自动补&#39;\0&#39;</span>
+</span><span class='line'>		 <span class='n'>start</span> <span class='o'>=</span> <span class='n'>p</span><span class='o'>+</span><span class='mi'>1</span><span class='p'>;</span>
+</span><span class='line'>		 <span class='n'>cout</span> <span class='o'>&lt;&lt;</span> <span class='n'>part</span> <span class='o'>&lt;&lt;</span> <span class='n'>endl</span><span class='p'>;</span>
+</span><span class='line'>	<span class='p'>}</span>
+</span><span class='line'>	
+</span></code></pre></td></tr></table></div></figure></div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2013
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2013/03/24/str-split/';
+        var disqus_url = 'http://sleefd.github.com/blog/2013/03/24/str-split/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
