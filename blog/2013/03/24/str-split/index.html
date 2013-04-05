@@ -7,8 +7,7 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content="文件解析，数据提取等都要用到字符串分割方法，笔试题也多有考到。 如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。 如将ip地址192.168.0.1解析成四段，可以如此写：
-sample.java 1
+	<meta name="description" content="文件解析，数据提取等都要用到字符串分割方法，笔试题也多有考到。 如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。 如将ip地址192.168.0.1解析成四段，可以如此写： sample.java 1
 2
 3
 4
@@ -87,8 +86,14 @@ sample.java 1
 <p>如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。</p>
 
 <p>如将ip地址192.168.0.1解析成四段，可以如此写：</p>
-<!-- more --><figure class='code'><figcaption><span>sample.java</span></figcaption>
- <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span>sample.java</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -99,25 +104,29 @@ sample.java 1
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class='n'>Sanner</span> <span class='n'>in</span> <span class='o'>=</span> <span class='k'>new</span> <span class='n'>Scanner</span><span class='o'>(</span><span class='s'>&quot;in.txt&quot;</span><span class='o'>);</span>
-</span><span class='line'><span class='k'>while</span><span class='o'>(</span><span class='n'>in</span><span class='o'>.</span><span class='na'>hasNextLine</span><span class='o'>())</span>
-</span><span class='line'><span class='o'>{</span>
-</span><span class='line'>    <span class='n'>String</span> <span class='n'>line</span> <span class='o'>=</span> <span class='n'>in</span><span class='o'>.</span><span class='na'>nextLine</span><span class='o'>();</span>
-</span><span class='line'>    <span class='n'>StringTokenizer</span> <span class='n'>st</span> <span class='o'>=</span> <span class='k'>new</span> <span class='n'>StringTokenizer</span><span class='o'>(</span><span class='n'>line</span> <span class='o'>,</span> <span class='s'>&quot;,&quot;</span><span class='o'>);</span>
-</span><span class='line'>    <span class='k'>while</span><span class='o'>(</span><span class='n'>st</span><span class='o'>.</span><span class='na'>haxNext</span><span class='o'>())</span>
-</span><span class='line'>    <span class='o'>{</span>
-</span><span class='line'>        <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>print</span><span class='o'>(</span><span class='n'>st</span><span class='o'>.</span><span class='na'>next</span><span class='o'>()</span> <span class='o'>+</span> <span class='s'>&quot; &quot;</span><span class='o'>);</span>
-</span><span class='line'>    <span class='o'>}</span>
-</span><span class='line'>    <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>println</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>);</span>
-</span><span class='line'><span class='o'>}</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Sanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="s">&quot;in.txt&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="k">while</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">StringTokenizer</span> <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringTokenizer</span><span class="o">(</span><span class="n">line</span> <span class="o">,</span> <span class="s">&quot;,&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">while</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">haxNext</span><span class="o">())</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">next</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>如果是用c++的话，有以下三种做法：</p>
 
 <ol>
-<li>
-<p>使用cstring头文件中的strtok函数</p>
+<li>使用cstring头文件中的strtok函数</li>
+</ol>
+
+
 <figure class='code'><figcaption><span>split1.cpp</span></figcaption>
-<div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -129,35 +138,43 @@ sample.java 1
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>char</span> <span class='n'>line</span><span class='p'>[</span><span class='mi'>20</span><span class='p'>];</span>
-</span><span class='line'>	<span class='kt'>char</span> <span class='n'>delim</span><span class='p'>[]</span> <span class='o'>=</span> <span class='err'>“</span><span class='p'>,</span><span class='err'>”</span><span class='p'>;</span>
-</span><span class='line'>	<span class='k'>while</span><span class='p'>(</span><span class='n'>gets</span><span class='p'>(</span><span class='n'>line</span><span class='p'>))</span>
-</span><span class='line'>	<span class='p'>{</span>
-</span><span class='line'>		<span class='kt'>char</span> <span class='o'>*</span><span class='n'>p</span> <span class='o'>=</span> <span class='nb'>NULL</span><span class='p'>;</span>
-</span><span class='line'>		<span class='n'>p</span> <span class='o'>=</span> <span class='n'>strtok</span><span class='p'>(</span><span class='n'>line</span><span class='p'>,</span> <span class='n'>delim</span> <span class='p'>);</span>
-</span><span class='line'>		<span class='k'>while</span><span class='p'>(</span><span class='n'>p</span><span class='o'>!=</span><span class='nb'>NULL</span><span class='p'>)</span>
-</span><span class='line'>		<span class='p'>{</span>
-</span><span class='line'>			<span class='n'>cout</span> <span class='o'>&lt;&lt;</span> <span class='n'>p</span> <span class='o'>&lt;&lt;</span> <span class='n'>endl</span><span class='p'>;</span>
-</span><span class='line'>			<span class='n'>p</span> <span class='o'>=</span> <span class='n'>strtok</span><span class='p'>(</span><span class='nb'>NULL</span><span class='p'>,</span><span class='n'>delim</span><span class='p'>);</span>
-</span><span class='line'>		<span class='p'>}</span>
-</span><span class='line'>	<span class='p'>}</span>
-</span></code></pre></td></tr></table></div></figure></li>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">delim</span><span class="p">[]</span> <span class="o">=</span> <span class="err">“</span><span class="p">,</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">gets</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">delim</span> <span class="p">);</span>
+</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">delim</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<li>
-<p>使用stdio.h中的sscanf</p>
-<figure class='code'><figcaption><span>split2.cpp</span></figcaption>
-<div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>int</span> <span class='n'>a</span><span class='p'>,</span><span class='n'>b</span><span class='p'>,</span><span class='n'>c</span><span class='p'>;</span>
-</span><span class='line'>	<span class='n'>sscanf</span><span class='p'>(</span><span class='n'>line</span><span class='p'>,</span> <span class='s'>&quot;%d.%d.%d&quot;</span> <span class='p'>,</span><span class='o'>&amp;</span><span class='n'>a</span> <span class='p'>,</span> <span class='o'>&amp;</span><span class='n'>b</span> <span class='p'>,</span><span class='o'>&amp;</span><span class='n'>c</span><span class='p'>);</span>
-</span><span class='line'>	
-</span></code></pre></td></tr></table></div></figure></li>
+
+<ol>
+<li>使用stdio.h中的sscanf</li>
 </ol>
 
-<p>sscanf和sprintf是非常有用的函数，应该善用。<br />3. 使用strstr()或strchr()或substr()函数<br />用这些函数显然是通过寻找delim出现的位置，来分隔字符串。对delim是单个字符的就比较好写了，多个字符很麻烦吧。<br />还是以解析ip地址为例:</p>
+
+<figure class='code'><figcaption><span>split2.cpp</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">sscanf</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s">&quot;%d.%d.%d&quot;</span> <span class="p">,</span><span class="o">&amp;</span><span class="n">a</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">,</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sscanf和sprintf是非常有用的函数，应该善用。<br/>
+3.  使用strstr()或strchr()或substr()函数<br/>
+用这些函数显然是通过寻找delim出现的位置，来分隔字符串。对delim是单个字符的就比较好写了，多个字符很麻烦吧。<br/>
+还是以解析ip地址为例:</p>
+
 <figure class='code'><figcaption><span>split3.cpp</span></figcaption>
- <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -173,23 +190,25 @@ sample.java 1
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>	<span class='kt'>char</span> <span class='n'>line</span><span class='p'>[</span><span class='mi'>20</span><span class='p'>]</span> <span class='o'>=</span> <span class='s'>&quot;192.168.1&quot;</span><span class='p'>;</span>
-</span><span class='line'>	<span class='kt'>char</span> <span class='n'>part</span><span class='p'>[</span><span class='mi'>10</span><span class='p'>];</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;192.168.1&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">part</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 </span><span class='line'>
-</span><span class='line'>	<span class='kt'>char</span> <span class='o'>*</span><span class='n'>start</span> <span class='o'>=</span> <span class='n'>line</span><span class='p'>;</span>
-</span><span class='line'>	<span class='kt'>char</span> <span class='o'>*</span><span class='n'>p</span> <span class='p'>;</span>
-</span><span class='line'>	<span class='kt'>int</span> <span class='n'>len</span> <span class='o'>=</span> <span class='n'>strlen</span><span class='p'>(</span><span class='n'>line</span><span class='p'>);</span>
-</span><span class='line'>	<span class='n'>line</span><span class='p'>[</span><span class='n'>len</span><span class='p'>]</span> <span class='o'>=</span> <span class='sc'>&#39;.&#39;</span><span class='p'>;</span> <span class='c1'>//字符串最后补一个delim，方便后面操作</span>
-</span><span class='line'>	<span class='k'>while</span><span class='p'>((</span><span class='n'>p</span> <span class='o'>=</span> <span class='n'>strstr</span><span class='p'>(</span><span class='n'>start</span><span class='p'>,</span><span class='s'>&quot;.&quot;</span><span class='p'>))</span><span class='o'>!=</span><span class='nb'>NULL</span><span class='p'>)</span>
-</span><span class='line'>	<span class='p'>{</span>
-</span><span class='line'>		 <span class='n'>len</span> <span class='o'>=</span> <span class='n'>p</span> <span class='o'>-</span><span class='n'>start</span><span class='p'>;</span>
-</span><span class='line'>		 <span class='n'>strncpy</span><span class='p'>(</span><span class='n'>part</span><span class='p'>,</span><span class='n'>start</span><span class='p'>,</span> <span class='n'>len</span><span class='p'>);</span>
-</span><span class='line'>		 <span class='n'>part</span><span class='p'>[</span><span class='n'>len</span><span class='p'>]</span> <span class='o'>=</span> <span class='sc'>&#39;\0&#39;</span><span class='p'>;</span>  <span class='c1'>//strncpy不会自动补&#39;\0&#39;</span>
-</span><span class='line'>		 <span class='n'>start</span> <span class='o'>=</span> <span class='n'>p</span><span class='o'>+</span><span class='mi'>1</span><span class='p'>;</span>
-</span><span class='line'>		 <span class='n'>cout</span> <span class='o'>&lt;&lt;</span> <span class='n'>part</span> <span class='o'>&lt;&lt;</span> <span class='n'>endl</span><span class='p'>;</span>
-</span><span class='line'>	<span class='p'>}</span>
-</span><span class='line'>	
-</span></code></pre></td></tr></table></div></figure></div>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">start</span> <span class="o">=</span> <span class="n">line</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">line</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="p">;</span> <span class="c1">//字符串最后补一个delim，方便后面操作</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">((</span><span class="n">p</span> <span class="o">=</span> <span class="n">strstr</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="s">&quot;.&quot;</span><span class="p">))</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>       <span class="n">len</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span><span class="n">start</span><span class="p">;</span>
+</span><span class='line'>       <span class="n">strncpy</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="n">start</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span><span class='line'>       <span class="n">part</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>  <span class="c1">//strncpy不会自动补&#39;\0&#39;</span>
+</span><span class='line'>       <span class="n">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>       <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">part</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
 
 </article>
 

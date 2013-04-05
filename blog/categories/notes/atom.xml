@@ -4,7 +4,7 @@
   <title><![CDATA[Category: notes | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-03-24T20:14:08+08:00</updated>
+  <updated>2013-04-05T13:49:18+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -18,35 +18,41 @@
     <link href="http://sleefd.github.com/blog/2013/03/07/markdown-ppt/"/>
     <updated>2013-03-07T20:40:00+08:00</updated>
     <id>http://sleefd.github.com/blog/2013/03/07/markdown-ppt</id>
-    <content type="html"><![CDATA[<h4 id='why_markdown'>why markdown?</h4>
+    <content type="html"><![CDATA[<h4>why markdown?</h4>
 
-<p>最近一直用markdown写blog，深感markdown易于书写的特性。如果markdown能用于写ppt岂不是更好，再加上<a href='http://johnmacfarlane.net/pandoc/'>pandoc</a>这个奇妙的工具，那么所有涉及到书写的工作基本上都可以由markdown完成了。 <!-- more --></p>
+<p>最近一直用markdown写blog，深感markdown易于书写的特性。如果markdown能用于写ppt岂不是更好，再加上<a href="http://johnmacfarlane.net/pandoc/">pandoc</a>这个奇妙的工具，那么所有涉及到书写的工作基本上都可以由markdown完成了。</p>
 
-<h4 id='principle'>principle</h4>
+<!-- more -->
 
-<p>偶然在Toplanguage上看到有人用<a href='https://github.com/bartaz/impress.js'>impress.js</a>做的html格式的ppt，简洁而且可以直接丢在网上，感觉非常有趣。于是开始研究原理，发现其实很直观：强大的javascript+css3即可以实现很绚丽的ppt效果（其实前端开发也很有挑战性嘛~）。ppt书写可以直接由markdown,html,textile等语言完成，very nice~</p>
 
-<p>花时间研究了一下，发现支持html ppt制作的template很多，比如deck.js,impress.js，reveal.js等等。最后找到了<a href='http://slideshow.rubyforge.org/'>slideshow</a>这个ruby gem，易用而且支持上面提到的各种template，特此推荐。</p>
+<h4>principle</h4>
 
-<h4 id='slideshow'>slideshow</h4>
+<p>偶然在Toplanguage上看到有人用<a href="https://github.com/bartaz/impress.js">impress.js</a>做的html格式的ppt，简洁而且可以直接丢在网上，感觉非常有趣。于是开始研究原理，发现其实很直观：强大的javascript+css3即可以实现很绚丽的ppt效果（其实前端开发也很有挑战性嘛~）。ppt书写可以直接由markdown,html,textile等语言完成，very nice~</p>
+
+<p>花时间研究了一下，发现支持html ppt制作的template很多，比如deck.js,impress.js，reveal.js等等。最后找到了<a href="http://slideshow.rubyforge.org/">slideshow</a>这个ruby gem，易用而且支持上面提到的各种template，特此推荐。</p>
+
+<h4>slideshow</h4>
 
 <p>slideshow可以将markdown或textile等文件解析成ppt，所有的ppt页面都在一个html页中，因此你可以直接把这个html放在自己的网站上，供别人访问。</p>
 
-<p>slideshow安装方法如下：</p>
-
-<ol>
-<li>安装ruby和ruby gems</li>
-
-<li>gem install slideshow #安装slideshow gem</li>
-</ol>
+<p>slideshow安装方法如下：<br/>
+1. 安装ruby和ruby gems<br/>
+2. gem install slideshow #安装slideshow gem</p>
 
 <p>使用时直接 <code>slideshow test.md</code> 即可将test.md解析成test.html，双击打开就是一个ppt，方向键控制播放,F11全屏浏览，very simple.</p>
 
-<p>与test.html同时生成的还有s6文件夹，包含s6模版文件；test.css，html样式表。<br />slideshow默认为s6模版。安装其他模版输入命令以deck.js为例：<br />&#8216;slideshow -f deck.js&#8217;</p>
+<p>与test.html同时生成的还有s6文件夹，包含s6模版文件；test.css，html样式表。<br/>
+slideshow默认为s6模版。安装其他模版输入命令以deck.js为例：<br/>
+'slideshow -f deck.js'</p>
 
-<p>自己做了一个<a href='http://sleefd.github.com/denclue'>demo</a>，关于密度聚类算法的ppt。<a href='/denclue/denclue.md'>示例markdown</a>。</p>
-<hr />
-<p>slideshow参考:<a href='http://slideshow.rubyforge.org/'>slideshow</a><br />推荐网站 <a href='www.rvl.io.'>reveal</a>，支持在线ppt编辑，可直接生成一个在线浏览链接，非常方便。</p>]]></content>
+<p>自己做了一个<a href="http://sleefd.github.com/denclue">demo</a>，关于密度聚类算法的ppt。<a href="/denclue/denclue.md">示例markdown</a>。</p>
+
+<hr>
+
+
+<p>slideshow参考:<a href="http://slideshow.rubyforge.org/">slideshow</a><br/>
+推荐网站 <a href="www.rvl.io.">reveal</a>，支持在线ppt编辑，可直接生成一个在线浏览链接，非常方便。</p>
+]]></content>
   </entry>
   
   <entry>
@@ -54,19 +60,30 @@
     <link href="http://sleefd.github.com/blog/2013/02/27/use-third-library/"/>
     <updated>2013-02-27T22:08:00+08:00</updated>
     <id>http://sleefd.github.com/blog/2013/02/27/use-third-library</id>
-    <content type="html"><![CDATA[<h3 id='id1'>编译运行基本步骤</h3>
+    <content type="html"><![CDATA[<h3>编译运行基本步骤</h3>
 
-<p>./comfigure #生成makefile，configure文件一般是Linux下可执行脚本<br />make #编译<br />make install #安装文件<br />make uninstall #卸载文件 <!--more--></p>
+<p>./comfigure  #生成makefile，configure文件一般是Linux下可执行脚本<br/>
+make  #编译<br/>
+make install #安装文件<br/>
+make uninstall #卸载文件</p>
 
-<h3 id='id2'>版本</h3>
+<!--more-->
 
-<p>source distribution 源代码版本。第三方库或软件的源代码，需要自己编译才能使用。<br />源代码版本需要经过上述三个步骤才能执行。<br />binary distribution 二进制版本即可执行版本，已编译好的，在特点平台上可直接运行安装的。</p>
 
-<h3 id='id3'>平台</h3>
+<h3>版本</h3>
 
-<p>windows下使用源代码版本的软件或库，需要自己写makefile，然后make,make install.平时我们使用复杂的IDE如visual studio等，可以直接编译运行，不需要 自己写makefile，上述三个步骤已由IDE自己完成。</p>
+<p>source distribution 源代码版本。第三方库或软件的源代码，需要自己编译才能使用。<br/>
+源代码版本需要经过上述三个步骤才能执行。<br/>
+binary distribution 二进制版本即可执行版本，已编译好的，在特点平台上可直接运行安装的。</p>
 
-<p>linux下源码包以压缩包的形式存在，需先解压，然后cd到所在目录，再输入上述三个命令即可。 注意阅读源码包中的readme和install文件。</p>]]></content>
+<h3>平台</h3>
+
+<p>windows下使用源代码版本的软件或库，需要自己写makefile，然后make,make install.平时我们使用复杂的IDE如visual studio等，可以直接编译运行，不需要
+自己写makefile，上述三个步骤已由IDE自己完成。</p>
+
+<p>linux下源码包以压缩包的形式存在，需先解压，然后cd到所在目录，再输入上述三个命令即可。
+注意阅读源码包中的readme和install文件。</p>
+]]></content>
   </entry>
   
   <entry>
@@ -75,58 +92,51 @@
     <updated>2012-12-28T20:53:00+08:00</updated>
     <id>http://sleefd.github.com/blog/2012/12/28/build-problems</id>
     <content type="html"><![CDATA[<ol>
-<li>
-<p>bundle install时，ffi包装不上：</p>
+<li><p>bundle install时，ffi包装不上：</p>
 
-<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~&gt;1.1.1)<a href='http://michael-roshen.iteye.com/blog/1613151'>【参考】</a><!--more--></p>
-</li>
-
-<li>
-<p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
+<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~>1.1.1)<a href="http://michael-roshen.iteye.com/blog/1613151">【参考】</a><!--more--></p></li>
+<li><p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
 
 <ul>
-<li>
-<p><a href='http://rubyinstaller.org/downloads/'>安装Devkit</a></p>
-</li>
+<li><a href="http://rubyinstaller.org/downloads/">安装Devkit</a></li>
+<li>配置环境变量path为devkit下的bin目录</li>
+<li><p>执行代码</p>
 
-<li>
-<p>配置环境变量path为devkit下的bin目录 * 执行代码</p>
-<code>
-ruby dk.rb init  
+<p><code>
+ruby dk.rb init<br/>
 ruby dk.rb install
- </code></li>
+</code></p></li>
 </ul>
 </li>
-
-<li>
-<p>rake generate失败</p>
+<li><p>rake generate失败</p>
 
 <ul>
-<li>检查_config.yml，注意每个冒号后面都有空格 * 大多数原因是中文解析问题。<br />首先所有的markdown文件应为UTF-8格式，然后修改 你ruby安装目录下的convertible.rb：<br /><code>
-self.content = File.read(File.join(base, name))改为  
+<li>检查_config.yml，注意每个冒号后面都有空格</li>
+<li>大多数原因是中文解析问题。<br/>
+首先所有的markdown文件应为UTF-8格式，然后修改
+你ruby安装目录下的convertible.rb：<br/>
+<code>
+self.content = File.read(File.join(base, name))改为<br/>
 self.content = File.read(File.join(base, name), :encoding => "UTF-8")
 </code></li>
 </ul>
 </li>
-</ol>
-
-<p>4. 使用模版的方法：<br /> RTFM:一定要看模版说明<br /> 通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p>
-
-<ol>
-<li>
-<p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被显示。</p>
-</li>
-
-<li>
-<p>配置disqus的方法：</p>
+<li><p>使用模版的方法：<br/>
+RTFM:一定要看模版说明<br/>
+通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p></li>
+<li><p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被显示。</p></li>
+<li><p>配置disqus的方法：</p>
 
 <ul>
 <li>注册disqus id，配置与你的站点关联，取一个站点shortname，记住它，很重要。</li>
-
-<li>设置_config.yml中disqus部分：<br />disqus_short_name: 站点shortname<br />disqus_show_comment_count: true</li>
+<li>设置_config.yml中disqus部分：<br/>
+disqus_short_name: 站点shortname<br/>
+disqus_show_comment_count: true</li>
 </ul>
 </li>
-</ol>]]></content>
+</ol>
+
+]]></content>
   </entry>
   
   <entry>
@@ -135,61 +145,113 @@ self.content = File.read(File.join(base, name), :encoding => "UTF-8")
     <updated>2012-12-28T16:36:00+08:00</updated>
     <id>http://sleefd.github.com/blog/2012/12/28/mex</id>
     <content type="html"><![CDATA[<ul>
-<li>
-<p>目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。</p>
-</li>
-
-<li>
-<p>媒介：mex file 有约定俗成的格式，c源文件必须包括头文件 &#8220;mex.h&#8221;, 函数 mexFunction为入口函数. 当然也可以使用其他符合c语法的函数，头文件。</p>
-</li>
-
-<li>
-<p>关键： 各种数据类型在matlab和c之间的转换，传递。 <!-- more --></p>
-</li>
-
-<li>
-<p>mexFunction的签名为 <code>
-void mexFunction( int nlhs,
-   mxArray *plhs[],
-   int nrhs,
-   const mxArray *prhs[]) 
-</code> 参数解释： nlhs: 输出个数 nrhs: 输入参数的个数 plhs: 指向输出的指针数组 prhs: 指向输入的常指针数组 <br />* 数据类型： matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。</p>
-</li>
-
-<li>
-<p>基本操作：mx/mex函数 1. <em>mx开头</em>的函数为对数据进行操作的函数. 记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以 set操作可能会改变workspace中的变量。 2. <em>mex开头</em>的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。</p>
-</li>
+<li>目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。</li>
+<li>媒介：mex file
+  有约定俗成的格式，c源文件必须包括头文件 "mex.h", 函数 mexFunction为入口函数.
+  当然也可以使用其他符合c语法的函数，头文件。</li>
+<li>关键： 各种数据类型在matlab和c之间的转换，传递。</li>
 </ul>
 
-<h4 id='id4'>代码示例</h4>
+
+<!-- more -->
+
 
 <ul>
-<li>
-<p>c从matlab获得数据 获取matrix: double <em>p = mxGetPr(prhs<span>0</span>) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。 只要参数是matrix(m</em>n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~</p>
+<li>mexFunction的签名为
+<code>
+  void mexFunction( int nlhs,
+   mxArray <em>plhs[],
+   int nrhs,
+   const mxArray </em>prhs[])
+</code>
+参数解释：
+  nlhs: 输出个数
+  nrhs: 输入参数的个数
+  plhs: 指向输出的指针数组
+  prhs: 指向输入的常指针数组</li>
+<li>数据类型：
+  matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。</li>
+<li>基本操作：mx/mex函数
 
-<p>获取维数： <code>mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row &amp;&amp; column 数</code></p>
-
-<p>获取cell数据类型： <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for(int index = 0 ; index &lt; size ; ++index) { mxArray * p = mxGetCell(prhs&lt;span>0&lt;/span> , index); //得到index处的mexArray double &lt;em>elem = mxGetPr(p); }</span></code></pre></td></tr></table></div></figure></notextile></div> 直接获取data（数值 <code>		double *data;
-	data = mxGetData(prhs[0]);
-	//mxSetData(p1hs[0] , data);
-	</code></em></p>
-</li>
-
-<li>
-<p>c返回数据给matlab workspace输出：mexPrintf,类似c printf函数。 mexPrintf(&#8220;%d\n&#8221; , number); mexErrMsgTxt,打印error消息。 mexErrMsgTxt(&#8220;This is an error message.&#8221;); mexEvalString,在workspace中调用string指定的命令。 mexEvalString(&#8220;plot(<span>1:5</span>)&#8221;); //plot命令会被执行 想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。 分配空间的方法 1 plhs<span>0</span> = mxCreateDoubleMatrix(m,n,mxReal); double <em>data = mxGetPr(plhs<span>0</span>); //and then you can assign values to data. 2 利用mxMalloc (用法类似c malloc double</em>data = mxMalloc(sizeof(double) * num); &#8230; //assign values mxSetPr(prhs , data);</p>
-</li>
-
-<li>
-<p>动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree 虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.</p>
-</li>
+<pre><code>   1. *mx开头*的函数为对数据进行操作的函数.
+      记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以
+      set操作可能会改变workspace中的变量。
+   2. *mex开头*的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。
+</code></pre></li>
 </ul>
 
-<p>配置mex file编译环境在matlab中： 直接在命令行下输入 mex -setup 选择合适的编译器就ok了。</p>
+
+<h4>代码示例</h4>
+
+<ul>
+<li>c从matlab获得数据
+  获取matrix:
+
+<pre><code>  double *p = mxGetPr(prhs[0]) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。
+  只要参数是matrix(m*n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~
+</code></pre>
+
+  获取维数：
+
+<pre><code>  `mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row &amp;&amp; column 数`
+</code></pre>
+
+  获取cell数据类型：
+  <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;pre>&lt;code>  for(int index = 0 ; index &lt; size  ; ++index)
+</span><span class='line'>  {
+</span><span class='line'>      mxArray * p = mxGetCell(prhs[0] , index); //得到index处的mexArray
+</span><span class='line'>      double *elem = mxGetPr(p);
+</span><span class='line'>  }
+</span><span class='line'>&lt;/code>&lt;/pre></span></code></pre></td></tr></table></div></figure></notextile></div>
+  直接获取data（数值
+`       double *data;
+
+<pre><code>  data = mxGetData(prhs[0]);
+  //mxSetData(p1hs[0] , data);
+  `
+</code></pre></li>
+<li>c返回数据给matlab
+
+<pre><code>workspace输出：mexPrintf,类似c printf函数。  mexPrintf("%d\n" , number);
+               mexErrMsgTxt,打印error消息。 mexErrMsgTxt("This is an error message.");
+               mexEvalString,在workspace中调用string指定的命令。 mexEvalString("plot([1:5])"); //plot命令会被执行
+</code></pre>
+
+   想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。
+
+<pre><code>  分配空间的方法 1 plhs[0] = mxCreateDoubleMatrix(m,n,mxReal);
+                  double *data = mxGetPr(plhs[0]); //and then you can assign values to data.
+                 2 利用mxMalloc (用法类似c malloc
+                  double *data = mxMalloc(sizeof(double) * num);
+                      ... //assign values
+                  mxSetPr(prhs , data);
+</code></pre></li>
+<li>动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree
+
+<pre><code>       虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.
+</code></pre></li>
+</ul>
+
+
+<p>配置mex file编译环境在matlab中：</p>
+
+<pre><code>直接在命令行下输入 mex -setup 选择合适的编译器就ok了。
+</code></pre>
 
 <p>调试：可在VS中采用附加进程调试</p>
 
-<p>有价值的资料： 1. apiext.pdf //matlab external interface 2. mexguide.pdf</p>]]></content>
+<p>有价值的资料：</p>
+
+<pre><code>1. apiext.pdf //matlab external interface 
+2. mexguide.pdf 
+</code></pre>
+]]></content>
   </entry>
   
 </feed>

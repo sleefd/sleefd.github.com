@@ -7,7 +7,9 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content=" 文件解析，数据提取等都要用到字符串分割方法，笔试题也多有考到。 如果是用java语言编写的话，一般顺手就会敲出StringTokenizer，然后输入部分直接由Scanner类处理。 如将ip地址192.168.0.1解析成四段，可以如此写： Read on &rarr; ">
+	<meta name="description" content="问题来源: 编程珠玑col1,prob4. 问题定义：从一个序列中随机取得一个数或k个不重复数 问题求解：分两种情况： 已知序列的长度n：直接使用rand()函数（发现c++0x有 random 头文件）
+长度未知: 蓄水池抽样算法
+（话说很愁一些算法书，总是直接给出算法，完全不知道怎么想出来的 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +91,55 @@
   
 
 
+<time datetime="2013-04-05T11:44:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/programming-pearls/'>programming pearls</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2013/04/05/reservoir-sampling/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2013/04/05/reservoir-sampling/">编程珠玑之蓄水池抽样算法</a></h1>
+	<div class="entry-content">
+		<p><strong>问题来源</strong>:  编程珠玑col1,prob4.</p>
+
+<p><strong>问题定义</strong>：从一个序列中随机取得一个数或k个不重复数</p>
+
+<p><strong>问题求解</strong>：分两种情况：</p>
+
+<ul>
+<li>已知序列的长度n：直接使用rand()函数（发现c++0x有 <a href="http://www.cplusplus.com/reference/random/?kw=random">random</a> 头文件）</li>
+<li>长度未知: 蓄水池抽样算法
+（话说很愁一些算法书，总是直接给出算法，完全不知道怎么想出来的）</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2013/04/05/reservoir-sampling/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-03-24T15:42:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time></div>
 		<div class="tags">
 
@@ -109,8 +160,49 @@
 
 <p>如将ip地址192.168.0.1解析成四段，可以如此写：</p>
 
+
 		
 		<a href="/blog/2013/03/24/str-split/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-20T13:15:00+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/python/'>python</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2013/03/20/python-begin/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2013/03/20/python-begin/">Python入门(1)</a></h1>
+	<div class="entry-content">
+		<p>参考： http://blog.sina.com.cn/s/blog_a36b03a90101cyun.html</p>
+
+<p>python是面向对象的，解释执行的，跨平台的，自己内存管理的脚本语言。</p>
+
+
+		
+		<a href="/blog/2013/03/20/python-begin/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -144,9 +236,11 @@
 	</div>
 	<h1 class="title"><a href="/blog/2013/03/07/markdown-ppt/">使用markdown写ppt</a></h1>
 	<div class="entry-content">
-		<h4 id='why_markdown'>why markdown?</h4>
+		<h4>why markdown?</h4>
 
-<p>最近一直用markdown写blog，深感markdown易于书写的特性。如果markdown能用于写ppt岂不是更好，再加上<a href='http://johnmacfarlane.net/pandoc/'>pandoc</a>这个奇妙的工具，那么所有涉及到书写的工作基本上都可以由markdown完成了。 
+<p>最近一直用markdown写blog，深感markdown易于书写的特性。如果markdown能用于写ppt岂不是更好，再加上<a href="http://johnmacfarlane.net/pandoc/">pandoc</a>这个奇妙的工具，那么所有涉及到书写的工作基本上都可以由markdown完成了。</p>
+
+
 		
 		<a href="/blog/2013/03/07/markdown-ppt/" class="more-link">Read on &rarr;</a>
 	</div>
@@ -182,9 +276,14 @@
 	</div>
 	<h1 class="title"><a href="/blog/2013/02/27/use-third-library/">编译安装第三方lib</a></h1>
 	<div class="entry-content">
-		<h3 id='id6'>编译运行基本步骤</h3>
+		<h3>编译运行基本步骤</h3>
 
-<p>./comfigure #生成makefile，configure文件一般是Linux下可执行脚本<br />make #编译<br />make install #安装文件<br />make uninstall #卸载文件 
+<p>./comfigure  #生成makefile，configure文件一般是Linux下可执行脚本<br/>
+make  #编译<br/>
+make install #安装文件<br/>
+make uninstall #卸载文件</p>
+
+
 		
 		<a href="/blog/2013/02/27/use-third-library/" class="more-link">Read on &rarr;</a>
 	</div>
@@ -220,85 +319,11 @@
 	</div>
 	<h1 class="title"><a href="/blog/2013/01/27/pow/">在log(n)内求幂</a></h1>
 	<div class="entry-content">
-		<p>问题来源：编程珠玑 ,column4, problem 9，修改log（n）内的递归求幂算法为迭代算法。这样才知道求幂有O(log(n))复杂度的算法，sigh。发现很多问题都可以用二分的思想来解决。 
+		<p>问题来源：编程珠玑 ,column4, problem 9，修改log（n）内的递归求幂算法为迭代算法。这样才知道求幂有O(log(n))复杂度的算法，sigh。发现很多问题都可以用二分的思想来解决。</p>
+
+
 		
 		<a href="/blog/2013/01/27/pow/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-12T21:37:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/travel/'>travel</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2013/01/12/donghuxing/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2013/01/12/donghuxing/">四时之景不同，而乐亦无穷也</a></h1>
-	<div class="entry-content">
-		<p>和喵环东湖一周，大概2个半小时吧，挺快的，比平时快多了。<br />今天东湖雾很大，一眼看不到太远，虽没有秋天的静谧，没有秋天的金棕色红色，但是薄雾笼罩下的东湖确实别有风味。环湖路上的汽车依然很多，公汽依然不客气，随意的就把我们小折叠挤到路边边。<br />
-		
-		<a href="/blog/2013/01/12/donghuxing/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-28T20:53:00+08:00" pubdate data-updated="true">Dec 28<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/notes/'>notes</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2012/12/28/build-problems/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2012/12/28/build-problems/">Octopress博客搭建中问题汇总及解决方法</a></h1>
-	<div class="entry-content">
-		<ol>
-<li>
-<p>bundle install时，ffi包装不上：</p>
-
-<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~&gt;1.1.1)<a href='http://michael-roshen.iteye.com/blog/1613151'>【参考】</a>
-		
-		<a href="/blog/2012/12/28/build-problems/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

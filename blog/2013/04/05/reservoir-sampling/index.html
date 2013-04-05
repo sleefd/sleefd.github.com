@@ -1,0 +1,299 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>编程珠玑之蓄水池抽样算法 - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="问题来源: 编程珠玑col1,prob4. 问题定义：从一个序列中随机取得一个数或k个不重复数 问题求解：分两种情况： 已知序列的长度n：直接使用rand()函数（发现c++0x有 random 头文件）
+长度未知: 蓄水池抽样算法
+（话说很愁一些算法书，总是直接给出算法，完全不知道怎么想出来的 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2013/04/05/reservoir-sampling/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">编程珠玑之蓄水池抽样算法</h1>
+	<div class="entry-content"><p><strong>问题来源</strong>:  编程珠玑col1,prob4.</p>
+
+<p><strong>问题定义</strong>：从一个序列中随机取得一个数或k个不重复数</p>
+
+<p><strong>问题求解</strong>：分两种情况：</p>
+
+<ul>
+<li>已知序列的长度n：直接使用rand()函数（发现c++0x有 <a href="http://www.cplusplus.com/reference/random/?kw=random">random</a> 头文件）</li>
+<li>长度未知: 蓄水池抽样算法
+（话说很愁一些算法书，总是直接给出算法，完全不知道怎么想出来的）</li>
+</ul>
+
+
+<!--more-->
+
+
+<h3>序列长度已知</h3>
+
+<p>1.随机获取一个数</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="cp">#include&lt;cstdlib&gt;</span>
+</span><span class='line'>  <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.随机获取k个不重复数</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="cp">#include&lt;cstdlib&gt;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c1">// 生成[i,j)间的随机数</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">randint</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">id</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">));</span><span class="c1">//swap(i,j)交换i,j下标处的两个数</span>
+</span><span class='line'>      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>p.s.在长度已知的情况下，该问题直观上可以用list解决。
+选取一个数就从list中删掉，然后再随机生成一个下标（用初始迭代器移动到下标位置，list不支持下标操作）就ok了。</p>
+
+<h3>序列长度未知</h3>
+
+<p>关于蓄水池抽样算法：</p>
+
+<blockquote><p>该算法是针对从一个序列中随机抽取不重复的k个数，保证每个数被抽取到的概率为k/n这个问题而构建的。做法是：  -<br/>
+首先构建一个可放k个元素的蓄水池，将序列的前k个元素放入蓄水池中。<br/>
+然后从第k+1个元素开始，以k/n的概率来决定该元素是否被替换到池子中。
+当遍历完所有元素之后，就可以得到随机挑选出的k个元素。复杂度为O(n).</p></blockquote>
+
+<p>1.随机获取一个数</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//统计num的个数</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>       <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>       <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">//很显然id=0的概率为1/n，也就是每个num被选到的概率是1/n</span>
+</span><span class='line'>            <span class="n">res</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span>  <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.随机获取k个不重复数</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="kt">int</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="c1">//蓄水池</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">k</span> <span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="c1">//先放k个元素在蓄水池中</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>       <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'>       <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//从第k+1个元素开始</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>       <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>       <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>       <span class="k">if</span><span class="p">(</span> <span class="n">id</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="p">)</span> <span class="c1">//这一步也很直观，num有k/n的概率被换到蓄水池中</span>
+</span><span class='line'>            <span class="n">swap</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span><span class="c1">//把蓄水池中编号为id的数换成num</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//蓄水池中的k个数就是最终结果</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>证明每个数被取到的概率为k/n:</p>
+
+<ol>
+<li><p>对于第i个数(i&lt;k)，在前k步被选中的概率是1，
+从第k+1步开始，i不被选中的概率为k/k+1,那么读到第n个数时，
+第i个数(i&lt;k)被选中的概率 = 被选中的概率 * 以后每一步都不被换走的概率,即<br/>
+1 * k/k+1 * k+1/k+2 <em>&#8230;</em>n-1/n = k/n</p></li>
+<li><p>对于第j个数(j>=k)被选中的概率为：
+在他出现时被选中的概率 * 在他出现以后不被换走的概率,即: <br/>
+k/j * j /j+1 <em>。。。</em>n-1/n = k/n</p></li>
+<li><p>综上得证。</p></li>
+</ol>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2013
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2013/04/05/reservoir-sampling/';
+        var disqus_url = 'http://sleefd.github.com/blog/2013/04/05/reservoir-sampling/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

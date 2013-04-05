@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming pearls | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/programming-pearls/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-03-24T20:14:08+08:00</updated>
+  <updated>2013-04-05T13:49:18+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -14,39 +14,325 @@
 
   
   <entry>
+    <title type="html"><![CDATA[编程珠玑之蓄水池抽样算法]]></title>
+    <link href="http://sleefd.github.com/blog/2013/04/05/reservoir-sampling/"/>
+    <updated>2013-04-05T11:44:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2013/04/05/reservoir-sampling</id>
+    <content type="html"><![CDATA[<p><strong>问题来源</strong>:  编程珠玑col1,prob4.</p>
+
+<p><strong>问题定义</strong>：从一个序列中随机取得一个数或k个不重复数</p>
+
+<p><strong>问题求解</strong>：分两种情况：</p>
+
+<ul>
+<li>已知序列的长度n：直接使用rand()函数（发现c++0x有 <a href="http://www.cplusplus.com/reference/random/?kw=random">random</a> 头文件）</li>
+<li>长度未知: 蓄水池抽样算法
+（话说很愁一些算法书，总是直接给出算法，完全不知道怎么想出来的）</li>
+</ul>
+
+
+<!--more-->
+
+
+<h3>序列长度已知</h3>
+
+<p>1.随机获取一个数</p>
+
+<pre><code><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&amp;lt;cstdlib&amp;gt;</span>
+</span><span class='line'><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'><span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">arr</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>2.随机获取k个不重复数</p>
+
+<pre><code><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&amp;lt;cstdlib&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 生成[i,j)间的随机数</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">randint</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'><span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">k</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">id</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">));</span><span class="c1">//swap(i,j)交换i,j下标处的两个数</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">arr</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>p.s.在长度已知的情况下，该问题直观上可以用list解决。
+选取一个数就从list中删掉，然后再随机生成一个下标（用初始迭代器移动到下标位置，list不支持下标操作）就ok了。</p>
+
+<h3>序列长度未知</h3>
+
+<p>关于蓄水池抽样算法：</p>
+
+<blockquote><p>该算法是针对从一个序列中随机抽取不重复的k个数，保证每个数被抽取到的概率为k/n这个问题而构建的。做法是：  -<br/>
+首先构建一个可放k个元素的蓄水池，将序列的前k个元素放入蓄水池中。<br/>
+然后从第k+1个元素开始，以k/n的概率来决定该元素是否被替换到池子中。
+当遍历完所有元素之后，就可以得到随机挑选出的k个元素。复杂度为O(n).</p></blockquote>
+
+<p>1.随机获取一个数</p>
+
+<pre><code><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//统计num的个数</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>     <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>     <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">//很显然id=0的概率为1/n，也就是每个num被选到的概率是1/n</span>
+</span><span class='line'>          <span class="n">res</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">res</span>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>2.随机获取k个不重复数</p>
+
+<pre><code><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="c1">//蓄水池</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">k</span> <span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="c1">//先放k个元素在蓄水池中</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>     <span class="n">cin</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'>     <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//从第k+1个元素开始</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">cin</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">num</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>     <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>     <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">if</span><span class="p">(</span> <span class="n">id</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">k</span> <span class="p">)</span> <span class="c1">//这一步也很直观，num有k/n的概率被换到蓄水池中</span>
+</span><span class='line'>          <span class="n">swap</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span><span class="c1">//把蓄水池中编号为id的数换成num</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//蓄水池中的k个数就是最终结果</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>证明每个数被取到的概率为k/n:</p>
+
+<ol>
+<li><p>对于第i个数(i&lt;k)，在前k步被选中的概率是1，
+从第k+1步开始，i不被选中的概率为k/k+1,那么读到第n个数时，
+第i个数(i&lt;k)被选中的概率 = 被选中的概率 * 以后每一步都不被换走的概率,即<br/>
+1 * k/k+1 * k+1/k+2 <em>...</em>n-1/n = k/n</p></li>
+<li><p>对于第j个数(j>=k)被选中的概率为：
+在他出现时被选中的概率 * 在他出现以后不被换走的概率,即: <br/>
+k/j * j /j+1 <em>。。。</em>n-1/n = k/n</p></li>
+<li><p>综上得证。</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[在log(n)内求幂]]></title>
     <link href="http://sleefd.github.com/blog/2013/01/27/pow/"/>
     <updated>2013-01-27T19:36:00+08:00</updated>
     <id>http://sleefd.github.com/blog/2013/01/27/pow</id>
-    <content type="html"><![CDATA[<p>问题来源：编程珠玑 ,column4, problem 9，修改log（n）内的递归求幂算法为迭代算法。这样才知道求幂有O(log(n))复杂度的算法，sigh。发现很多问题都可以用二分的思想来解决。 <!-- more --> 问题定义：求pow(x,n)，其中n为正整数。<br />解法一： 很直观的解法，每个人第一眼看到都会想到。将x乘以n次就ok嘛，一个for循环了事。时间复杂度O(n)。</p>
+    <content type="html"><![CDATA[<p>问题来源：编程珠玑 ,column4, problem 9，修改log（n）内的递归求幂算法为迭代算法。这样才知道求幂有O(log(n))复杂度的算法，sigh。发现很多问题都可以用二分的思想来解决。</p>
 
-<p>- 迭代求解 <br /><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow1.cpp </span></figcaption>
+<!-- more -->
+
+
+<p>问题定义：求pow(x,n)，其中n为正整数。<br/>
+解法一： 很直观的解法，每个人第一眼看到都会想到。将x乘以n次就ok嘛，一个for循环了事。时间复杂度O(n)。</p>
+
+<ul>
+<li>迭代求解    <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow1.cpp </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'> <span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span> <span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">result</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">;</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></em> 递归求解<br /><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow2.cpp </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'> <span class="kt">double</span> <span class="n">pow</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="k">else</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div><br />解法二： pow(2 , 4)以解法一的话，需要做四次乘法，但是如果先计算2*2，再计算4*4,两次乘法ok，即log（n）次乘法。<br /><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if(n/2 == 0) pow(x,n) = square(pow(x , n/2)); if(n%2 == 1) pow(x,n) = x * pow(x,n-1)</span></code></pre></td></tr></table></div></figure></notextile></div> * 递归解法<br /><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow3.cpp</span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'> <span class="kt">double</span> <span class="n">pow</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">n</span> <span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">square</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span> <span class="k">else</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span> <span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> * 迭代求解<br /><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow4.cpp </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'> <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="k">if</span><span class="p">(</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span> <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">n</span> <span class="p">)</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">result</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;=</span> <span class="n">result</span><span class="p">;</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">result</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;=</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div><br />测试scaffolding:<br /><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>test.cpp </span></figcaption>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span> <span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'><span class="n">result</span> <span class="o">*=</span><span class="n">x</span><span class="p">;</span>
+</span><span class='line'><span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>递归求解<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow2.cpp </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">double</span> <span class="n">pow</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">else</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="err">&#39;</span><span class="n">define_f_pow</span><span class="err">&#39;</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">f</span> <span class="n">pow</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// cout &amp;#171;&amp;#160;f(2,-1) &amp;#171;&amp;#160;endl; //源代码应该检查指数不为正整数的情况 cout &amp;#171;&amp;#160;f(2,0) &amp;#171;&amp;#160;endl; cout &amp;#171;&amp;#160;f(2,7) &amp;#171;&amp;#160;endl; cout &amp;#171;&amp;#160;f(2,8) &amp;#171;&amp;#160;endl; return 0; } </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div><br/>
+解法二： pow(2 , 4)以解法一的话，需要做四次乘法，但是如果先计算2*2，再计算4*4,两次乘法ok，即log（n）次乘法。<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if(n/2 == 0)
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>  pow(x,n) = square(pow(x , n/2));
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>  if(n%2 == 1)
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>  pow(x,n) = x * pow(x,n-1)
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+<li>递归解法<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow3.cpp</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">double</span> <span class="n">pow</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">n</span> <span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">square</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>
+</span><span class='line'>  <span class="k">else</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span><span class="p">(</span><span class="n">x</span> <span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>迭代求解<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>pow4.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="o">*</span><span class="mi">2</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">n</span> <span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">id</span> <span class="o">=</span> <span class="n">id</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">*=</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">id</span> <span class="o">=</span> <span class="n">id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">*=</span> <span class="n">x</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div><br/>
+测试scaffolding:<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>test.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">f</span> <span class="n">pow</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="c1">// cout &amp;lt;&amp;lt; f(2,-1) &amp;lt;&amp;lt; endl; //源代码应该检查指数不为正整数的情况</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</ul>
 
-<p>总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br />将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法， 而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p>]]></content>
+
+<p>总结： 二分的方法在很多地方都能使用，以后遇到算法优化，首先考虑二分。<br/>
+将第二种解法的递归形式改为迭代形式我想了好久。仔细想想，递归是自顶向下的求解方法，
+而迭代是自底向上的求解方法，然后枚举出所有的可能情况，就可以很好的写出递归或迭代形式的算法。</p>
+]]></content>
   </entry>
   
 </feed>

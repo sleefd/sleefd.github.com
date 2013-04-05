@@ -7,7 +7,8 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content="bundle install时，ffi包装不上： 将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~&gt;1.1.1)【参考】 bundle install时，安装某个包提示&gt; ERROR: Failed to build gem native &hellip;">
+	<meta name="description" content="bundle install时，ffi包装不上： 将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~>1.1.1)【参考】
+bundle install时，安装某个包提示&gt; ERROR: Failed to build gem native extension &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,58 +76,51 @@
 				<div id="content" class="inner"><article class="post">
 	<h1 class="title">Octopress博客搭建中问题汇总及解决方法</h1>
 	<div class="entry-content"><ol>
-<li>
-<p>bundle install时，ffi包装不上：</p>
+<li><p>bundle install时，ffi包装不上：</p>
 
-<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~&gt;1.1.1)<a href='http://michael-roshen.iteye.com/blog/1613151'>【参考】</a><!--more--></p>
-</li>
-
-<li>
-<p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
+<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~>1.1.1)<a href="http://michael-roshen.iteye.com/blog/1613151">【参考】</a><!--more--></p></li>
+<li><p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
 
 <ul>
-<li>
-<p><a href='http://rubyinstaller.org/downloads/'>安装Devkit</a></p>
-</li>
+<li><a href="http://rubyinstaller.org/downloads/">安装Devkit</a></li>
+<li>配置环境变量path为devkit下的bin目录</li>
+<li><p>执行代码</p>
 
-<li>
-<p>配置环境变量path为devkit下的bin目录 * 执行代码</p>
-<code>
-ruby dk.rb init  
+<p><code>
+ruby dk.rb init<br/>
 ruby dk.rb install
- </code></li>
+</code></p></li>
 </ul>
 </li>
-
-<li>
-<p>rake generate失败</p>
+<li><p>rake generate失败</p>
 
 <ul>
-<li>检查_config.yml，注意每个冒号后面都有空格 * 大多数原因是中文解析问题。<br />首先所有的markdown文件应为UTF-8格式，然后修改 你ruby安装目录下的convertible.rb：<br /><code>
-self.content = File.read(File.join(base, name))改为  
+<li>检查_config.yml，注意每个冒号后面都有空格</li>
+<li>大多数原因是中文解析问题。<br/>
+首先所有的markdown文件应为UTF-8格式，然后修改
+你ruby安装目录下的convertible.rb：<br/>
+<code>
+self.content = File.read(File.join(base, name))改为<br/>
 self.content = File.read(File.join(base, name), :encoding => "UTF-8")
 </code></li>
 </ul>
 </li>
-</ol>
-
-<p>4. 使用模版的方法：<br /> RTFM:一定要看模版说明<br /> 通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p>
-
-<ol>
-<li>
-<p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被显示。</p>
-</li>
-
-<li>
-<p>配置disqus的方法：</p>
+<li><p>使用模版的方法：<br/>
+RTFM:一定要看模版说明<br/>
+通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p></li>
+<li><p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被显示。</p></li>
+<li><p>配置disqus的方法：</p>
 
 <ul>
 <li>注册disqus id，配置与你的站点关联，取一个站点shortname，记住它，很重要。</li>
-
-<li>设置_config.yml中disqus部分：<br />disqus_short_name: 站点shortname<br />disqus_show_comment_count: true</li>
+<li>设置_config.yml中disqus部分：<br/>
+disqus_short_name: 站点shortname<br/>
+disqus_show_comment_count: true</li>
 </ul>
 </li>
-</ol></div>
+</ol>
+
+</div>
 
 </article>
 
