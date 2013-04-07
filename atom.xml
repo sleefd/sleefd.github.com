@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-04-05T13:49:18+08:00</updated>
+  <updated>2013-04-07T22:39:10+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IKM test]]></title>
+    <link href="http://sleefd.github.com/blog/2013/04/07/ikm-test/"/>
+    <updated>2013-04-07T22:27:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2013/04/07/ikm-test</id>
+    <content type="html"><![CDATA[<p>晚上做了Morgan stanley的c++在线测评，表示我又要死在这种笔试上了。
+全部都是OOP概念题：继承，多态，内部类。逻辑题算法题一点都没有。<br/>
+尼玛以后都不好意思说自己会c++了，丢人。<br/>
+java的题不做了，估计又全部是oop概念题。</p>
+
+<!-- more -->
+
+
+<p>伤感，看来要饿补OOP部分，然后总结一下写个list贴在桌上，以后好秒杀。</p>
+
+<p>笔试什么的，做本题库才是王道。</p>
+
+<p>难道我今年注定投哪儿就酱油哪儿？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[编程珠玑之蓄水池抽样算法]]></title>
