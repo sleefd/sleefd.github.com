@@ -1,0 +1,73 @@
+<p>﻿&#8212;
+layout: post
+title: &#8220;xml笔记&#8221;
+date: 2013-05-08 12:24
+comments: true</p>
+
+<h2>categories: notes</h2>
+
+<p>大摩的IKM online test考到了xml，因此在w3school上学习了下xml.</p>
+
+<p>xml: extensible markup language，可扩展标记语言</p>
+
+<p>用来传输和存储结构化的数据，而html是负责表现数据。xml旨在传输信息，而html旨在显示信息。</p>
+
+<p>xml的特点：纯文本，自解释性的，简化数据共享、传输</p>
+
+<!-- more -->
+
+
+<p>用在很多地方，比如web service, RSS等，很多应用程序使用xml交换数据。</p>
+
+<p><strong>xml语法：</strong></p>
+
+<ul>
+<li><p>xml声明: <code>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</code></p></li>
+<li><p>xml的标签组成了树形结构</p>
+
+<p>  必须有一个根元素。<br/>
+元素之中可以有子元素，构成树形层次关系。<br/>
+  元素之间的内容为文本节点。
+  每个标签必须是闭合的。有<code>&lt;ele&gt;</code>,必有<code>&lt;/ele&gt;</code> 。 <br/>
+  标签可以带有属性，属性必须用引号括起来，单引号双引号都可以，如<code>&lt;from date='1990-2-3'&gt;Jenny&lt;/from&gt;</code><br/>
+  有些属性应该是数据内容，应该用元素标签表示，不应该使用属性表示 <code>&lt;date&gt;1990-2-3&lt;/date&gt; &lt;from&gt;Jenny&lt;/from&gt;</code></p></li>
+<li><p>元素名称的命名要求：</p>
+
+<p>  不能以xml（不区分大小写）开始<br/>
+  不能以数字和标点符号开始<br/>
+  名称之间不能有空格，<code>&lt;first name&gt;</code>错误的命名。</p></li>
+<li><p>xml元素必须正确的嵌套。</p></li>
+<li><p>形式良好的xml文档满足上面所有的语法要求。</p></li>
+</ul>
+
+
+<p><strong>xml验证：</strong></p>
+
+<p>由xml文档规则直接检验xml文档的正确性。规则由DTD(document type definition)和xml schema定义。两者都定义了xml需满足的要求，schema使用更多。</p>
+
+<p><strong>xml显示: 为xml文档添加显示效果</strong></p>
+
+<p>使用css和XSLT(extensible stylesheet language transformations)显示文档。
+语法 <code>&lt;?xml-stylesheet type="text/css" href="cd_catalog.css"?&gt;</code> 或 <code>&lt;?xml-stylesheet type="text/xsl" href="simple.xsl"?&gt;</code>
+将样式表或XSLT链接到该xml文档。</p>
+
+<p><strong>xml解析：</strong></p>
+
+<p>首先要获取xml文档对象，然后通过xml DOM获取对象的元素文本内容结合html DOM在html中显示出来。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">xmlhttp</span><span class="o">=</span><span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span class='line'><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="s2">&quot;cd_catalog.xml&quot;</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+</span><span class='line'><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span><span class='line'><span class="nx">xmlDoc</span><span class="o">=</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseXML</span><span class="p">;</span><span class="c1">//xml文档对象</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;book&quot;</span><span class="p">).</span><span class="nx">innerhtml</span> <span class="o">=</span> <span class="nx">xmlDoc</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;book&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nodeValue</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong> xml基础测试: </strong></p>
+
+<p>直接做xml测验就ok了。</p>
