@@ -1,0 +1,255 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>微软2013实习笔试查漏补缺 - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="微软2013暑期实习笔试题部分题目分析。
+比较欣慰的是俺通过了这次笔试，哈哈= = cdecl 和 stdcall的区别 原题是c++哪种函数调用方式支持变长参数调用。
+第一直觉是在_cdecl和_stdcall中选，其中一个是由主调函数压栈和弹栈，一个由被调用函数自己压栈和弹栈， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2013/05/06/ms-intern-write-test/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">微软2013实习笔试查漏补缺</h1>
+	<div class="entry-content"><p>微软2013暑期实习笔试题部分题目分析。
+比较欣慰的是俺通过了这次笔试，哈哈= =</p>
+
+<ul>
+<li><em>cdecl 和 </em>stdcall的区别</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>原题是c++哪种函数调用方式支持变长参数调用。<br/>
+第一直觉是在_cdecl和_stdcall中选，其中一个是由主调函数压栈和弹栈，一个由被调用函数自己压栈和弹栈，但是忘记了谁对应谁。<br/>
+然后又联想到printf函数，这个函数是支持变长参数的，推理一下就是默认的调用方式支持变长参数，可惜忘了两者间哪个是默认的调用方式，sigh.</p>
+
+<ol>
+<li><p>_stdcall是Pascal程序的缺省调用方式，通常用于Win32 Api中，函数采用从右到左的压栈方式，自己在退出时清空堆栈。VC将函数编译后会在函数名前面加上下划线前缀，在函数名后加上&#8221;@&#8221;和参数的字节数。 int f(void *p) &#8211;>> _f@4(在外部汇编语言里可以用这个名字引用这个函数)</p></li>
+<li><p>_cdecl是C调用约定（The C default calling convention），按从右至左的顺序压参数入栈，由调用者把参数弹出栈,。对于传送参数的内存栈是由调用者来维护的（正因为如此，实现可变参数 vararg的函数(如printf)只能使用该调用约定）。另外，在函数名修饰约定方面也有所不同。 <em>cdecl是C和C＋＋程序的缺省调用方式。每一个调用它的函数都包含清空堆栈的代码，所以产生的可执行文件大小会比调用</em>stdcall函数的大。函数采用从右到左的压栈方式。VC将函数编译后会在函数名前面加上下划线前缀。</p></li>
+<li><p>m*n网格中矩形的总个数</p>
+
+<p>  公式是:<code>sum = m*(m+1)/2*n*(n+1)/2</code>，分析见<a href="">思维的偏见</a></p></li>
+<li><p>MVC模式理解</p>
+
+<p>  这种概念题用英文表达后感觉很难选对。<br/>
+  MVC是一种软件架构。MVC的核心思想是代码重用和功能分离。<br/>
+  model:负责处理数据和数据相关的请求。<br/>
+  view:负责显示数据。<br/>
+  controller:负责业务逻辑，处理用户的请求，把model层的数据在view层显示出来。</p></li>
+<li><p>链表和数组的区别</p>
+
+<p>  A. 当两者都有序时，搜索时间复杂度不同<br/>
+B. 动态增加和删除元素<br/>
+C. 随即访问效率<br/>
+D. 数据存储类型<br/>
+选A,B,C,D.<br/>
+A:数组二分搜索比链表快，因为链表不支持O(1)的随机访问。<br/>
+B:链表增添删除元素容易。<br/>
+C:数组支持下标随机访问。<br/>
+D:链表的数据存储类型必须为复合类型，数组既可以支持复合类型也可以支持简单类型。</p></li>
+<li><p>const使用</p>
+
+<p>  定义整型常量：<br/>
+  const int a = 4;<br/>
+  int const a = 4;<br/>
+  定义指针常量：<br/>
+  const int <em>p = &a;<br/>
+  int const </em>p = &a; <br/>
+  定义常指针:<br/>
+  int *const p = &a;</p></li>
+<li><p>输出题</p></li>
+</ol>
+
+
+<p>当时没意识到，这是一个指针类型转换问题。从子类指针转为父类指针，数据宽度变小，指针每次移动的大小也变小。</p>
+
+<p>A是父类，有数据long a;B是A的子类，增加数据long b;</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">void</span> <span class="n">setA</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span><span class="n">data</span> <span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">B</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">//输出是什么？</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//输出22221111</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>分析：从B类型的指针转为A类型的指针，指针指向的数据从8个字节变成了4个字节，则每次setA改变 data[i*4]这个位置的值，因此最终结果是22221111</p>
+
+<ul>
+<li><p>除法和右移的区别</p>
+
+<p>  题目：F和G、X是32位有符号整数,F = X/2,G = X>>1,最后发现F!=G，这意味着：<br/>
+  A. 有编译错误<br/>
+  B. X是奇数<br/>
+C. X是负数<br/>
+D. F-G = 1<br/>
+E. G-F = 1</p>
+
+<p>  答案 B,C,D <br/>
+分析：
+首先X是负数，正数除以2和右移没有区别。
+X是负数，右移是在前面补1.随便举例一看，X是奇数且F-G = 1。如果X是负偶数，F=G.</p></li>
+<li><p>天平称量问题</p>
+
+<p>  题目：N个球中有一个球比其他球轻，问若称量三次能找到这个次品球，可能的N的取值。<br/>
+分析：这个题目在刘未鹏的《暗示间》里面“快排为什么那样快？”这一章有讲解。天平可以处在三种状态:平衡、左轻、右轻。每一次称量，排除三分之一的可能性。称量m次最多可以解决m<sup>3个球的情况。</sup></p></li>
+</ul>
+
+
+<hr />
+
+<p>细细回味了下微软的题，感觉每一题都很有意思。
+另外意识到自己的思考能力很弱，思考全面性急需提高。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2013
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2013/05/06/ms-intern-write-test/';
+        var disqus_url = 'http://sleefd.github.com/blog/2013/05/06/ms-intern-write-test/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -7,11 +7,7 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content="﻿&#8212;
-layout: post
-title: &#8220;微软2013暑期实习笔试查漏补缺&#8221;
-date: 2013-5-06 06:41
-comments: true categories: notes 微软笔试查漏补缺 微软2013暑期实习笔试题部分题目分析。 &hellip;">
+	<meta name="description" content="由求m*n网格中矩形的总个数想到的 这个问题出自微软今年（2013）实习生的笔试题。原题是确定3*4网格中矩形的总个数，答案从5个选项中选一个。一般化之后也就是m*n网格中矩形的总个数是多少。 以下先叙述下我对这个问题的思维求解过程： 看到这个题第一直觉是找规律，应该有一个公式可以直接计算出结果 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,141 +89,31 @@ comments: true categories: notes 微软笔试查漏补缺 微软2013暑期实习
   
 
 
-<time datetime="2013-11-06T00:00:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time></div>
+<time datetime="2013-05-08T12:31:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time></div>
 		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/thoughts/'>thoughts</a>
+
 
 </div>
 		
-			<span class="comments"><a href="/blog/2013/11/06/ms-intern-write-test/#disqus_thread">Comments</a></span>
+			<span class="comments"><a href="/blog/2013/05/08/mind-prejudice/#disqus_thread">Comments</a></span>
 		
 	</div>
-	<h1 class="title"><a href="/blog/2013/11/06/ms-intern-write-test/">Ms Intern Write Test</a></h1>
+	<h1 class="title"><a href="/blog/2013/05/08/mind-prejudice/">思维的偏执</a></h1>
 	<div class="entry-content">
-		<p>﻿&#8212;
-layout: post
-title: &#8220;微软2013暑期实习笔试查漏补缺&#8221;
-date: 2013-5-06 06:41
-comments: true</p>
+		<h5>由求m*n网格中矩形的总个数想到的</h5>
 
-<h2>categories: notes</h2>
+<p>这个问题出自微软今年（2013）实习生的笔试题。原题是确定3*4网格中矩形的总个数，答案从5个选项中选一个。一般化之后也就是m*n网格中矩形的总个数是多少。</p>
 
-<h3>微软笔试查漏补缺</h3>
+<p>以下先叙述下我对这个问题的思维求解过程：</p>
 
-<p>微软2013暑期实习笔试题部分题目分析。
-比较欣慰的是俺通过了这次笔试，哈哈= =</p>
+<p>看到这个题第一直觉是找规律，应该有一个公式可以直接计算出结果。而找规律的一般做法有两种：一是把原问题分解成几个小问题，求解每个小问题，然后综合得出结果;二是研究几个简单特例，然后从特例中总结出一般规律。这两种做法在考场中我都采用了。</p>
 
-<ul>
-<li><p><em>cdecl 和 </em>stdcall的区别</p>
-
-<p>  原题是c++哪种函数调用方式支持变长参数调用。<br/>
-第一直觉是在<code>_cdecl</code>和<code>_stdcall</code>中选，其中一个是由主调函数压栈和弹栈，一个由被调用函数自己压栈和弹栈，但是忘记了谁对应谁。<br/>
-然后又联想到printf函数，这个函数是支持变长参数的，推理一下就是默认的调用方式支持变长参数，可惜忘了两者间哪个是默认的调用方式，sigh.
-<code></p></li>
-<li><p>_stdcall是Pascal程序的缺省调用方式，通常用于Win32 Api中，函数采用从右到左的压栈方式，自己在退出时清空堆栈。VC将函数编译后会在函数名前面加上下划线前缀，在函数名后加上"@"和参数的字节数。 int f(void *p) -->> _f@4(在外部汇编语言里可以用这个名字引用这个函数)</p></li>
-<li><p>_cdecl是C调用约定（The C default calling convention），按从右至左的顺序压参数入栈，由调用者把参数弹出栈,。对于传送参数的内存栈是由调用者来维护的（正因为如此，实现可变参数 vararg的函数(如printf)只能使用该调用约定）。另外，在函数名修饰约定方面也有所不同。 <em>cdecl是C和C＋＋程序的缺省调用方式。每一个调用它的函数都包含清空堆栈的代码，所以产生的可执行文件大小会比调用</em>stdcall函数的大。函数采用从右到左的压栈方式。VC将函数编译后会在函数名前面加上下划线前缀。
-</code></p></li>
-<li><p>m*n网格中矩形的总个数</p>
-
-<p>  公式是:<code>sum = m*(m+1)/2*n*(n+1)/2</code>，分析见<a href="">思维的偏见</a></p></li>
-<li><p>MVC模式理解</p>
-
-<p>  这种概念题用英文表达后感觉很难选对。<br/>
-  MVC是一种软件架构。MVC的核心思想是代码重用和功能分离。<br/>
-  model:负责处理数据和数据相关的请求。<br/>
-  view:负责显示数据。<br/>
-  controller:负责业务逻辑，处理用户的请求，把model层的数据在view层显示出来。</p></li>
-<li><p>链表和数组的区别</p></li>
-</ul>
-
-
-<p>A. 当两者都有序时，搜索时间复杂度不同<br/>
-B. 动态增加和删除元素<br/>
-C. 随即访问效率<br/>
-D. 数据存储类型<br/>
-选A,B,C,D.<br/>
-A:数组二分搜索比链表快，因为链表不支持O(1)的随机访问。<br/>
-B:链表增添删除元素容易。<br/>
-C:数组支持下标随机访问。<br/>
-D:链表的数据存储类型必须为复合类型，数组既可以支持复合类型也可以支持简单类型。</p>
-
-<ul>
-<li><p>const使用</p>
-
-<p>  定义整型常量：<br/>
-  const int a = 4;<br/>
-  int const a = 4;<br/>
-  定义指针常量：<br/>
-  const int <em>p = &a;<br/>
-  int const </em>p = &a; <br/>
-  定义常指针:<br/>
-  int *const p = &a;</p></li>
-<li><p>输出题</p></li>
-</ul>
-
-
-<p>当时没意识到，这是一个指针类型转换问题。从子类指针转为父类指针，数据宽度变小，指针每次移动的大小也变小。</p>
-
-<p>A是父类，有数据long a;B是A的子类，增加数据long b;</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">void</span> <span class="n">setA</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span><span class="n">data</span> <span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="n">B</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
-</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">//输出是什么？</span>
-</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span><span class='line'><span class="c1">//输出22221111</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>分析：从B类型的指针转为A类型的指针，指针指向的数据从8个字节变成了4个字节，则每次setA改变 data[i*4]这个位置的值，因此最终结果是22221111</p>
-
-<ul>
-<li><p>除法和右移的区别</p>
-
-<p>  题目：F和G、X是32位有符号整数,F = X/2,G = X>>1,最后发现F!=G，这意味着：<br/>
-  A. 有编译错误<br/>
-  B. X是奇数<br/>
-C. X是负数<br/>
-D. F-G = 1<br/>
-E. G-F = 1</p>
-
-<p>  答案 B,C,D <br/>
-分析：
-首先X是负数，正数除以2和右移没有区别。
-X是负数，右移是在前面补1.随便举例一看，X是奇数且F-G = 1。如果X是负偶数，F=G.</p></li>
-<li><p>天平称量问题</p>
-
-<p>  题目：N个球中有一个球比其他球轻，问若称量三次能找到这个次品球，可能的N的取值。<br/>
-分析：这个题目在刘未鹏的《暗示间》里面“快排为什么那样快？”这一章有讲解。天平可以处在三种状态:平衡、左轻、右轻。每一次称量，排除三分之一的可能性。称量m次最多可以解决m<sup>3个球的情况。</sup></p></li>
-</ul>
-
-
-<hr />
-
-<p>细细回味了下微软的题，感觉每一题都很有意思。
-另外意识到自己的思考能力很弱，思考全面性急需提高。</p>
 
 		
-		
+		<a href="/blog/2013/05/08/mind-prejudice/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -247,25 +133,21 @@ X是负数，右移是在前面补1.随便举例一看，X是奇数且F-G = 1。
   
 
 
-<time datetime="2013-05-08T00:00:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time></div>
+<time datetime="2013-05-08T12:24:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time></div>
 		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/notes/'>notes</a>
+
 
 </div>
 		
 			<span class="comments"><a href="/blog/2013/05/08/xml-note/#disqus_thread">Comments</a></span>
 		
 	</div>
-	<h1 class="title"><a href="/blog/2013/05/08/xml-note/">Xml Note</a></h1>
+	<h1 class="title"><a href="/blog/2013/05/08/xml-note/">Xml笔记</a></h1>
 	<div class="entry-content">
-		<p>﻿&#8212;
-layout: post
-title: &#8220;xml笔记&#8221;
-date: 2013-05-08 12:24
-comments: true</p>
-
-<h2>categories: notes</h2>
-
-<p>大摩的IKM online test考到了xml，因此在w3school上学习了下xml.</p>
+		<p>大摩的IKM online test考到了xml，因此在w3school上学习了下xml.</p>
 
 <p>xml: extensible markup language，可扩展标记语言</p>
 
@@ -295,100 +177,31 @@ comments: true</p>
   
 
 
-<time datetime="2013-05-08T00:00:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time></div>
+<time datetime="2013-05-06T21:37:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time></div>
 		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/notes/'>notes</a>
+
 
 </div>
 		
-			<span class="comments"><a href="/blog/2013/05/08/mind-prejudice/#disqus_thread">Comments</a></span>
+			<span class="comments"><a href="/blog/2013/05/06/ms-intern-write-test/#disqus_thread">Comments</a></span>
 		
 	</div>
-	<h1 class="title"><a href="/blog/2013/05/08/mind-prejudice/">Mind Prejudice</a></h1>
+	<h1 class="title"><a href="/blog/2013/05/06/ms-intern-write-test/">微软2013实习笔试查漏补缺</a></h1>
 	<div class="entry-content">
-		<p>﻿&#8212;
-layout: post
-title: &#8220;思维的偏执&#8221;
-date: 2013-05-08 12:31
-comments: true</p>
-
-<h2>categories: thoughts</h2>
-
-<h3>思维的偏执：由求m*n网格中矩形的总个数想到的</h3>
-
-<p>这个问题出自微软今年（2013）实习生的笔试题。原题是确定3*4网格中矩形的总个数，答案从5个选项中选一个。一般化之后也就是m*n网格中矩形的总个数是多少。</p>
-
-<p>以下先叙述下我对这个问题的思维求解过程：</p>
-
-<p>看到这个题第一直觉是找规律，应该有一个公式可以直接计算出结果。而找规律的一般做法有两种：一是把原问题分解成几个小问题，求解每个小问题，然后综合得出结果;二是研究几个简单特例，然后从特例中总结出一般规律。这两种做法在考场中我都采用了。</p>
-
-<ol>
-<li><p>矩形可以由1个网格组成，2个网格组成，3个网格组成。。 那么矩形的总个数应该是所有这些可能性之和。</p></li>
-<li><p>1个网格组成: m*n</p></li>
-<li>2个网格组成：(n-2+1)*m + (m-2+1)*n</li>
-<li>3个网格组成：(n-3+1)*m + (m-3+1)*n</li>
-<li>4个网格组成：n=4&amp;&amp;m&lt;4 (1*4网格组成的矩形个数)+ (2*2网格组成的矩形个数)<br/>
-第一部分个数为：(n-4+1)*m, 那么第二部分是多少呢？我颤抖了一下，这很难确定啊。(n-2+1)*(m-2+1)。在仔细考虑下难道对于每种网格组成我要考虑它的所有构成情况，比如4可以分解为1*4,2*2，那我就要考虑这两种情况罗，当m、n变大时，需要考虑的情况更多。。。</li>
-<li>5个网格组成: 显然不行嘛。。。</li>
-<li>6个网格组成： 可以嘛。。
-。。。</li>
-</ol>
-
-
-<p>颤抖了一下，这种做法我岂不是既要确定所有的网格组成情况，还要确定每个情况下的总矩形数，工程相当大啊。。。 于是默默pass掉这种做法。</p>
-
-<p>2.由特例到一般。1*1网格中矩形的总个数是1，2*2网格矩形总个数是9个，2*3网格中矩形的总个数是18个，我肉眼看去没有什么规律啊..又pass掉。</p>
-
-<p>由于是选择题，在笔试考场的我，最后直接选择了最笨却最有效的方法，直接数矩形的个数。3*4网格，多小啊，总共才12个小矩形。</p>
+		<p>微软2013暑期实习笔试题部分题目分析。
+比较欣慰的是俺通过了这次笔试，哈哈= =</p>
 
 <ul>
-<li>1个网格组成: 3*4 = 12</li>
-<li>2个网格组成： 3*3 + 2*4 = 17</li>
-<li>3个网格组成： 2 * 3 + 1 * 4 = 10</li>
-<li>4个网格组成: 1 * 3  + 3 * 2  = 9</li>
-<li>6个网格组成：2 * 2 + 3 = 7</li>
-<li>8个网格组成：2</li>
-<li>9个网格组成： 2</li>
-<li>12个网格组成： 1</li>
+<li><em>cdecl 和 </em>stdcall的区别</li>
 </ul>
 
 
-<p>总矩形个数为：12 + 17 + 10 + 9 + 7 + 2 + 2 + 1 = 60</p>
-
-<p>正确答案就是60了，可是我在笔试的时候算出来的确是58，为什么呢？我没有算9个网格组成矩形的情况，算漏了！why?在整个计算过程中我学习到偶数网格才能组成矩形，于是9个网格直接被我pass掉了。</p>
-
-<p><strong>学习过程竟然中出现了偏差，那人的学习是可信的嘛？如何才能保证思维的完备性呢？在高压的情况下，如何保证能面面俱到，考虑每个细节，而没有疏漏？</strong></p>
-
-<hr />
-
-<p>微软笔试之后，我一直在找规律，但是每次的出发点都是方法一，算1个网格，再算2个网格，最后总是会卡在同一个地方。直到今天中午突然想到了新的解法。<strong>为什么我每次思考都是从方法一开始呢？</strong></p>
-
-<p>矩形可以换一种描述方式,用x*y描述矩形,也就是网格形式描述矩形。
-那么很显然x的取值在[1,m],y的取值在[1,n]，总共考虑m*n种网格形式就ok了。</p>
-
-<p>对于某个x，共有m-x+1个不同的位置，y的取值范围为[1,n]。  <br/>
-对于y的某一个值<em>y,有n-</em>y+1种不同的可能。<br/>
-那么对于某个x:<br/>
-所有的可能数：(m-x+1)*[(n-1+1) + (n-2+1) +&#8230;+(n-n+1)]= (m-x+1)*n*(n+1)/2
-而x的取值范围是[1,m],因此最终结果是:<br/>
-ans = m*(m+1)/2*n*(n+1)/2</p>
-
-<hr />
-
-<p>上面是我个人的思维过程。<br/>
-可以发现，新的思考角度或切入点，会带来意想不到的效果。</p>
-
-<p>我们倾向于执着的从同一入口考虑问题，而不愿意改变思维方式或角度，过分偏执的相信自己的第一直觉。因为第一直觉是我们的舒适区，谁都愿意呆在自己的舒适区里，right?因为舒适区里，我们曾经有过成功的经历。如何打破自己的舒适区呢？</p>
-
-<p>很多我们认为理所当然的解法或者第一直觉往往很难改变，而这恰恰是我们陷入思维误区的开始。一个错误的方向意味着永远找不到正确的答案。所以如何多角度的考虑问题呢？</p>
-
-<p>p.s 由于每个人的经历、经验、思考方式不同，或许你会第一眼就找到上述问题的正确入口点，但是难保你不会有和我一样陷入思维怪圈的经历。在陷入思维的怪圈之后，如何突破呢？</p>
-
-<p>这次思考让我意识到，很多你认为有挑战性难解的问题，只要换一个角度说不定就能打开一个新天地，找到有效的解法。所以有顿悟这一说法嘛。</p>
-
-<p>最近想多看一下思维和心理学方面的书籍。</p>
 
 		
-		
+		<a href="/blog/2013/05/06/ms-intern-write-test/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

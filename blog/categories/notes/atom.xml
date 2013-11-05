@@ -4,7 +4,7 @@
   <title><![CDATA[Category: notes | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2013-11-06T06:50:36+08:00</updated>
+  <updated>2013-11-06T07:34:02+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,213 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[xml笔记]]></title>
+    <link href="http://sleefd.github.com/blog/2013/05/08/xml-note/"/>
+    <updated>2013-05-08T12:24:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2013/05/08/xml-note</id>
+    <content type="html"><![CDATA[<p>大摩的IKM online test考到了xml，因此在w3school上学习了下xml.</p>
+
+<p>xml: extensible markup language，可扩展标记语言</p>
+
+<p>用来传输和存储结构化的数据，而html是负责表现数据。xml旨在传输信息，而html旨在显示信息。</p>
+
+<p>xml的特点：纯文本，自解释性的，简化数据共享、传输</p>
+
+<!-- more -->
+
+
+<p>用在很多地方，比如web service, RSS等，很多应用程序使用xml交换数据。</p>
+
+<p><strong>xml语法：</strong></p>
+
+<ul>
+<li><p>xml声明: <code>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</code></p></li>
+<li><p>xml的标签组成了树形结构</p>
+
+<p>  必须有一个根元素。<br/>
+元素之中可以有子元素，构成树形层次关系。<br/>
+  元素之间的内容为文本节点。
+  每个标签必须是闭合的。有<code>&lt;ele&gt;</code>,必有<code>&lt;/ele&gt;</code> 。 <br/>
+  标签可以带有属性，属性必须用引号括起来，单引号双引号都可以，如<code>&lt;from date='1990-2-3'&gt;Jenny&lt;/from&gt;</code><br/>
+  有些属性应该是数据内容，应该用元素标签表示，不应该使用属性表示 <code>&lt;date&gt;1990-2-3&lt;/date&gt; &lt;from&gt;Jenny&lt;/from&gt;</code></p></li>
+<li><p>元素名称的命名要求：</p>
+
+<p>  不能以xml（不区分大小写）开始<br/>
+  不能以数字和标点符号开始<br/>
+  名称之间不能有空格，<code>&lt;first name&gt;</code>错误的命名。</p></li>
+<li><p>xml元素必须正确的嵌套。</p></li>
+<li><p>形式良好的xml文档满足上面所有的语法要求。</p></li>
+</ul>
+
+
+<p><strong>xml验证：</strong></p>
+
+<p>由xml文档规则直接检验xml文档的正确性。规则由DTD(document type definition)和xml schema定义。两者都定义了xml需满足的要求，schema使用更多。</p>
+
+<p><strong>xml显示: 为xml文档添加显示效果</strong></p>
+
+<p>使用css和XSLT(extensible stylesheet language transformations)显示文档。
+语法 <code>&lt;?xml-stylesheet type="text/css" href="cd_catalog.css"?&gt;</code> 或 <code>&lt;?xml-stylesheet type="text/xsl" href="simple.xsl"?&gt;</code>
+将样式表或XSLT链接到该xml文档。</p>
+
+<p><strong>xml解析：</strong></p>
+
+<p>首先要获取xml文档对象，然后通过xml DOM获取对象的元素文本内容结合html DOM在html中显示出来。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">xmlhttp</span><span class="o">=</span><span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span class='line'><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="s2">&quot;cd_catalog.xml&quot;</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+</span><span class='line'><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span><span class='line'><span class="nx">xmlDoc</span><span class="o">=</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseXML</span><span class="p">;</span><span class="c1">//xml文档对象</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;book&quot;</span><span class="p">).</span><span class="nx">innerhtml</span> <span class="o">=</span> <span class="nx">xmlDoc</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;book&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nodeValue</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong> xml基础测试: </strong></p>
+
+<p>直接做xml测验就ok了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[微软2013实习笔试查漏补缺]]></title>
+    <link href="http://sleefd.github.com/blog/2013/05/06/ms-intern-write-test/"/>
+    <updated>2013-05-06T21:37:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2013/05/06/ms-intern-write-test</id>
+    <content type="html"><![CDATA[<p>微软2013暑期实习笔试题部分题目分析。
+比较欣慰的是俺通过了这次笔试，哈哈= =</p>
+
+<ul>
+<li><em>cdecl 和 </em>stdcall的区别</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>原题是c++哪种函数调用方式支持变长参数调用。<br/>
+第一直觉是在_cdecl和_stdcall中选，其中一个是由主调函数压栈和弹栈，一个由被调用函数自己压栈和弹栈，但是忘记了谁对应谁。<br/>
+然后又联想到printf函数，这个函数是支持变长参数的，推理一下就是默认的调用方式支持变长参数，可惜忘了两者间哪个是默认的调用方式，sigh.</p>
+
+<ol>
+<li><p>_stdcall是Pascal程序的缺省调用方式，通常用于Win32 Api中，函数采用从右到左的压栈方式，自己在退出时清空堆栈。VC将函数编译后会在函数名前面加上下划线前缀，在函数名后加上"@"和参数的字节数。 int f(void *p) -->> _f@4(在外部汇编语言里可以用这个名字引用这个函数)</p></li>
+<li><p>_cdecl是C调用约定（The C default calling convention），按从右至左的顺序压参数入栈，由调用者把参数弹出栈,。对于传送参数的内存栈是由调用者来维护的（正因为如此，实现可变参数 vararg的函数(如printf)只能使用该调用约定）。另外，在函数名修饰约定方面也有所不同。 <em>cdecl是C和C＋＋程序的缺省调用方式。每一个调用它的函数都包含清空堆栈的代码，所以产生的可执行文件大小会比调用</em>stdcall函数的大。函数采用从右到左的压栈方式。VC将函数编译后会在函数名前面加上下划线前缀。</p></li>
+<li><p>m*n网格中矩形的总个数</p>
+
+<p>  公式是:<code>sum = m*(m+1)/2*n*(n+1)/2</code>，分析见<a href="">思维的偏见</a></p></li>
+<li><p>MVC模式理解</p>
+
+<p>  这种概念题用英文表达后感觉很难选对。<br/>
+  MVC是一种软件架构。MVC的核心思想是代码重用和功能分离。<br/>
+  model:负责处理数据和数据相关的请求。<br/>
+  view:负责显示数据。<br/>
+  controller:负责业务逻辑，处理用户的请求，把model层的数据在view层显示出来。</p></li>
+<li><p>链表和数组的区别</p>
+
+<p>  A. 当两者都有序时，搜索时间复杂度不同<br/>
+B. 动态增加和删除元素<br/>
+C. 随即访问效率<br/>
+D. 数据存储类型<br/>
+选A,B,C,D.<br/>
+A:数组二分搜索比链表快，因为链表不支持O(1)的随机访问。<br/>
+B:链表增添删除元素容易。<br/>
+C:数组支持下标随机访问。<br/>
+D:链表的数据存储类型必须为复合类型，数组既可以支持复合类型也可以支持简单类型。</p></li>
+<li><p>const使用</p>
+
+<p>  定义整型常量：<br/>
+  const int a = 4;<br/>
+  int const a = 4;<br/>
+  定义指针常量：<br/>
+  const int <em>p = &a;<br/>
+  int const </em>p = &a; <br/>
+  定义常指针:<br/>
+  int *const p = &a;</p></li>
+<li><p>输出题</p></li>
+</ol>
+
+
+<p>当时没意识到，这是一个指针类型转换问题。从子类指针转为父类指针，数据宽度变小，指针每次移动的大小也变小。</p>
+
+<p>A是父类，有数据long a;B是A的子类，增加数据long b;
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">void</span> <span class="n">setA</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span><span class="n">data</span> <span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="n">B</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">//输出是什么？&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">b</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//输出22221111</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+分析：从B类型的指针转为A类型的指针，指针指向的数据从8个字节变成了4个字节，则每次setA改变 data[i*4]这个位置的值，因此最终结果是22221111</p>
+
+<ul>
+<li><p>除法和右移的区别</p>
+
+<p>  题目：F和G、X是32位有符号整数,F = X/2,G = X>>1,最后发现F!=G，这意味着：<br/>
+  A. 有编译错误<br/>
+  B. X是奇数<br/>
+C. X是负数<br/>
+D. F-G = 1<br/>
+E. G-F = 1</p>
+
+<p>  答案 B,C,D <br/>
+分析：
+首先X是负数，正数除以2和右移没有区别。
+X是负数，右移是在前面补1.随便举例一看，X是奇数且F-G = 1。如果X是负偶数，F=G.</p></li>
+<li><p>天平称量问题</p>
+
+<p>  题目：N个球中有一个球比其他球轻，问若称量三次能找到这个次品球，可能的N的取值。<br/>
+分析：这个题目在刘未鹏的《暗示间》里面“快排为什么那样快？”这一章有讲解。天平可以处在三种状态:平衡、左轻、右轻。每一次称量，排除三分之一的可能性。称量m次最多可以解决m<sup>3个球的情况。</sup></p></li>
+</ul>
+
+
+<hr />
+
+<p>细细回味了下微软的题，感觉每一题都很有意思。
+另外意识到自己的思考能力很弱，思考全面性急需提高。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用markdown写ppt]]></title>
@@ -136,121 +343,6 @@ disqus_show_comment_count: true</li>
 </li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mex调用c代码备忘]]></title>
-    <link href="http://sleefd.github.com/blog/2012/12/28/mex/"/>
-    <updated>2012-12-28T16:36:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2012/12/28/mex</id>
-    <content type="html"><![CDATA[<ul>
-<li>目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。</li>
-<li>媒介：mex file
-  有约定俗成的格式，c源文件必须包括头文件 "mex.h", 函数 mexFunction为入口函数.
-  当然也可以使用其他符合c语法的函数，头文件。</li>
-<li>关键： 各种数据类型在matlab和c之间的转换，传递。</li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
-<li>mexFunction的签名为
-<code>
-  void mexFunction( int nlhs,
-   mxArray <em>plhs[],
-   int nrhs,
-   const mxArray </em>prhs[])
-</code>
-参数解释：
-  nlhs: 输出个数
-  nrhs: 输入参数的个数
-  plhs: 指向输出的指针数组
-  prhs: 指向输入的常指针数组</li>
-<li>数据类型：
-  matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。</li>
-<li>基本操作：mx/mex函数
-
-<pre><code>   1. *mx开头*的函数为对数据进行操作的函数.
-      记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以
-      set操作可能会改变workspace中的变量。
-   2. *mex开头*的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。
-</code></pre></li>
-</ul>
-
-
-<h4>代码示例</h4>
-
-<ul>
-<li>c从matlab获得数据
-  获取matrix:
-
-<pre><code>  double *p = mxGetPr(prhs[0]) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。
-  只要参数是matrix(m*n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~
-</code></pre>
-
-  获取维数：
-
-<pre><code>  `mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row &amp;&amp; column 数`
-</code></pre>
-
-  获取cell数据类型：
-  <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;pre>&lt;code>  for(int index = 0 ; index &lt; size  ; ++index)
-</span><span class='line'>  {
-</span><span class='line'>      mxArray * p = mxGetCell(prhs[0] , index); //得到index处的mexArray
-</span><span class='line'>      double *elem = mxGetPr(p);
-</span><span class='line'>  }
-</span><span class='line'>&lt;/code>&lt;/pre></span></code></pre></td></tr></table></div></figure></notextile></div>
-  直接获取data（数值
-`       double *data;
-
-<pre><code>  data = mxGetData(prhs[0]);
-  //mxSetData(p1hs[0] , data);
-  `
-</code></pre></li>
-<li>c返回数据给matlab
-
-<pre><code>workspace输出：mexPrintf,类似c printf函数。  mexPrintf("%d\n" , number);
-               mexErrMsgTxt,打印error消息。 mexErrMsgTxt("This is an error message.");
-               mexEvalString,在workspace中调用string指定的命令。 mexEvalString("plot([1:5])"); //plot命令会被执行
-</code></pre>
-
-   想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。
-
-<pre><code>  分配空间的方法 1 plhs[0] = mxCreateDoubleMatrix(m,n,mxReal);
-                  double *data = mxGetPr(plhs[0]); //and then you can assign values to data.
-                 2 利用mxMalloc (用法类似c malloc
-                  double *data = mxMalloc(sizeof(double) * num);
-                      ... //assign values
-                  mxSetPr(prhs , data);
-</code></pre></li>
-<li>动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree
-
-<pre><code>       虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.
-</code></pre></li>
-</ul>
-
-
-<p>配置mex file编译环境在matlab中：</p>
-
-<pre><code>直接在命令行下输入 mex -setup 选择合适的编译器就ok了。
-</code></pre>
-
-<p>调试：可在VS中采用附加进程调试</p>
-
-<p>有价值的资料：</p>
-
-<pre><code>1. apiext.pdf //matlab external interface 
-2. mexguide.pdf 
-</code></pre>
 ]]></content>
   </entry>
   
