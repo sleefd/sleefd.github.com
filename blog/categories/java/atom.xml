@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | Bright Shine]]></title>
+  <link href="http://sleefd.github.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://sleefd.github.com/"/>
+  <updated>2014-01-11T22:42:58+08:00</updated>
+  <id>http://sleefd.github.com/</id>
+  <author>
+    <name><![CDATA[slee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[gradle一瞥]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/11/gradle/"/>
+    <updated>2014-01-11T22:20:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/11/gradle</id>
+    <content type="html"><![CDATA[<p>gradle是一个自动化够建工具，用groovy语言编写。
+通过gradle脚本可以一次性完成很多任务，比如编译，测试， 打jar包，多项目管理，依赖管理等等。</p>
+
+<!--more-->
+
+
+<h3>task</h3>
+
+<p>task是gradle脚本定义的，一个项目可以执行的任务。</p>
+
+<p>gradle tasks 查看所有可以执行的任务
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//定义task</span>
+</span><span class='line'><span class="n">task</span> <span class="n">hello</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;&amp;</span><span class="n">lt</span><span class="o">;{&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;println &quot;hello world&quot;</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+gradle hello //运行Hello task</p>
+
+<h3>plugin</h3>
+
+<p>plugin是gradle预先设置好的一些task，直接使用plugin就不需要自己code task。
+比如java plugin，可以帮忙完成java代码的编译，测试，打jar包。
+idea plugin，可以把项目打包成idea工程。<br/>
+apply plugin后，gradle tasks查看可使用的task。</p>
+
+<p><strong>使用方法</strong>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//gradle.build</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>常见的plugin有:</p>
+
+<ul>
+<li>java: 提供java源代码编译，测试，运行，打包等功能</li>
+<li>idea: 构建idea工程</li>
+<li>eclipse: 构建eclipse工程</li>
+<li>jetty: 添加jetty服务器支持</li>
+<li>war: web project打包成war包</li>
+</ul>
+
+
+<h3>dependency management</h3>
+
+<p>很多时候项目编译要依赖第三方库，比如测试要使用junit,画图表要用Jfreechart，spring框架需要spring的库等。
+gradle可以管理这些依赖，自动下载需要的库。</p>
+
+<p>repositories定义外部依赖的来源。
+dependencies定义需要的依赖。</p>
+
+<p>声明外部依赖
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="n">repositories</span><span class="o">{&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;mavenCentral()</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'><span class="nl">compile:</span> <span class="s2">&quot;com.google.guava:guava:15.0&quot;</span>
+</span><span class='line'><span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>gradle wrapper</h3>
+
+<p>wrapper是一个task.当项目成员木有安装gradle时，通过gradle wrapper可以自动下载安装gradle.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
+</span><span class='line'><span class="n">task</span> <span class="nf">wrapper</span><span class="o">(</span><span class="nl">type:</span><span class="n">Wrapper</span><span class="o">)</span>
+</span><span class='line'><span class="o">{&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;gradleVersion = &quot;1.4&quot;</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>example</h3>
+
+<ul>
+<li><p>java项目</p>
+
+<pre><code>  1.创建项目目录,java plugin有约定的项目目录格式:
+  src  
+  ----main---java  
+  ----test---java  
+  mkdir src\main\java
+  mkdir src\main\test
+  2.build.gradle
+  <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span><span class='line'>  <span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>      <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+  3.gradle idea
+  创建idea项目
+</code></pre></li>
+<li><p>spring项目</p>
+
+<pre><code>  1.创建项目目录
+
+  src
+  ---main---java
+  ---webapp---WEB-INF---pages
+  ---test---java
+
+
+  2.build.gradle
+
+
+  <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span>
+</span><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;idea&#39;</span>
+</span><span class='line'>  <span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">compile</span> <span class="s2">&quot;org.springframework:spring-webmvc:3.2.0.RELEASE&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+ 3. gradle idea
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

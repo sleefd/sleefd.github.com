@@ -1,0 +1,334 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>gradle一瞥 - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="gradle是一个自动化够建工具，用groovy语言编写。
+通过gradle脚本可以一次性完成很多任务，比如编译，测试， 打jar包，多项目管理，依赖管理等等。 task task是gradle脚本定义的，一个项目可以执行的任务。 gradle tasks 查看所有可以执行的任务 1
+2
+3
+4 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2014/01/11/gradle/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Gradle一瞥</h1>
+	<div class="entry-content"><p>gradle是一个自动化够建工具，用groovy语言编写。
+通过gradle脚本可以一次性完成很多任务，比如编译，测试， 打jar包，多项目管理，依赖管理等等。</p>
+
+<!--more-->
+
+
+<h3>task</h3>
+
+<p>task是gradle脚本定义的，一个项目可以执行的任务。</p>
+
+<p>gradle tasks 查看所有可以执行的任务</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//定义task</span>
+</span><span class='line'><span class="n">task</span> <span class="n">hello</span><span class="o">&lt;&lt;{</span>
+</span><span class='line'>    <span class="n">println</span> <span class="s2">&quot;hello world&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gradle hello //运行Hello task</p>
+
+<h3>plugin</h3>
+
+<p>plugin是gradle预先设置好的一些task，直接使用plugin就不需要自己code task。
+比如java plugin，可以帮忙完成java代码的编译，测试，打jar包。
+idea plugin，可以把项目打包成idea工程。<br/>
+apply plugin后，gradle tasks查看可使用的task。</p>
+
+<p><strong>使用方法</strong></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//gradle.build</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>常见的plugin有:</p>
+
+<ul>
+<li>java: 提供java源代码编译，测试，运行，打包等功能</li>
+<li>idea: 构建idea工程</li>
+<li>eclipse: 构建eclipse工程</li>
+<li>jetty: 添加jetty服务器支持</li>
+<li>war: web project打包成war包</li>
+</ul>
+
+
+<h3>dependency management</h3>
+
+<p>很多时候项目编译要依赖第三方库，比如测试要使用junit,画图表要用Jfreechart，spring框架需要spring的库等。
+gradle可以管理这些依赖，自动下载需要的库。</p>
+
+<p>repositories定义外部依赖的来源。
+dependencies定义需要的依赖。</p>
+
+<p>声明外部依赖</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>    <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'><span class="nl">compile:</span> <span class="s2">&quot;com.google.guava:guava:15.0&quot;</span>
+</span><span class='line'><span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>gradle wrapper</h3>
+
+<p>wrapper是一个task.当项目成员木有安装gradle时，通过gradle wrapper可以自动下载安装gradle.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
+</span><span class='line'><span class="n">task</span> <span class="nf">wrapper</span><span class="o">(</span><span class="nl">type:</span><span class="n">Wrapper</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="n">gradleVersion</span> <span class="o">=</span> <span class="s2">&quot;1.4&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>example</h3>
+
+<ul>
+<li>java项目
+
+<pre><code>  1.创建项目目录,java plugin有约定的项目目录格式:
+  src  
+  ----main---java  
+  ----test---java  
+  mkdir src\main\java
+  mkdir src\main\test
+  2.build.gradle
+</code></pre></li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>        <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'>        <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span><span class='line'>        <span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>            <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>    3.gradle idea
+    创建idea项目
+</code></pre>
+
+<ul>
+<li>spring项目
+
+<pre><code>  1.创建项目目录
+
+  src
+  ---main---java
+  ---webapp---WEB-INF---pages
+  ---test---java
+
+
+  2.build.gradle
+</code></pre></li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>       <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span>
+</span><span class='line'>      <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;idea&#39;</span>
+</span><span class='line'>      <span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>      <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'>      <span class="n">compile</span> <span class="s2">&quot;org.springframework:spring-webmvc:3.2.0.RELEASE&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>   3. gradle idea
+</code></pre>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2014/01/11/gradle/';
+        var disqus_url = 'http://sleefd.github.com/blog/2014/01/11/gradle/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
