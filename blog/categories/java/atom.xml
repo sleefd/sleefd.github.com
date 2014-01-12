@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-11T22:42:58+08:00</updated>
+  <updated>2014-01-12T11:19:30+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -105,7 +105,7 @@ dependencies定义需要的依赖。</p>
 </span><span class='line'><span class="s">&lt;p&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">dependencies</span><span class="o">{</span>
-</span><span class='line'><span class="nl">compile:</span> <span class="s2">&quot;com.google.guava:guava:15.0&quot;</span>
+</span><span class='line'><span class="n">compile</span> <span class="s2">&quot;com.google.guava:guava:15.0&quot;</span>
 </span><span class='line'><span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
