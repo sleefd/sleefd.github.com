@@ -185,16 +185,19 @@ dependencies定义需要的依赖。</p>
 <h3>example</h3>
 
 <ul>
-<li>java项目
+<li><p>java项目</p>
 
-<pre><code>  1.创建项目目录,java plugin有约定的项目目录格式:
-  src  
-  ----main---java  
-  ----test---java  
-  mkdir src\main\java
-  mkdir src\main\test
-  2.build.gradle
-</code></pre></li>
+<ol>
+<li><p>创建项目目录,java plugin有约定的项目目录格式:</p>
+
+<p>   src<br/>
+   &#8212;-main&#8212;java<br/>
+   &#8212;-test&#8212;java<br/>
+   mkdir src\main\java<br/>
+   mkdir src\main\test</p></li>
+<li><p>build.gradle</p></li>
+</ol>
+</li>
 </ul>
 
 
@@ -206,36 +209,34 @@ dependencies定义需要的依赖。</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>        <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
-</span><span class='line'>        <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
-</span><span class='line'>        <span class="n">repositories</span><span class="o">{</span>
-</span><span class='line'>            <span class="n">mavenCentral</span><span class="o">()</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">dependencies</span><span class="o">{</span>
-</span><span class='line'>        <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span><span class='line'><span class="n">repositories</span><span class="o">{</span>
+</span><span class='line'>    <span class="n">mavenCentral</span><span class="o">()</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="n">dependencies</span><span class="o">{</span>
+</span><span class='line'>    <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<pre><code>    3.gradle idea
-    创建idea项目
+<pre><code>3. gradle idea  
+  创建idea项目
 </code></pre>
 
 <ul>
-<li>spring项目
+<li><p>spring项目</p>
 
-<pre><code>  1.创建项目目录
+<ol>
+<li><p>创建项目目录</p>
 
-  src
-  ---main---java
-  ---webapp---WEB-INF---pages
-  ---test---java
-
-
-  2.build.gradle
-</code></pre></li>
+<p>  src<br/>
+  &#8212;main&#8212;java<br/>
+  &#8212;webapp&#8212;WEB-INF&#8212;pages<br/>
+  &#8212;test&#8212;java</p></li>
+<li><p>build.gradle</p></li>
+</ol>
+</li>
 </ul>
 
 
@@ -249,8 +250,6 @@ dependencies定义需要的依赖。</p>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'>       <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span>
 </span><span class='line'>      <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;idea&#39;</span>
 </span><span class='line'>      <span class="n">repositories</span><span class="o">{</span>
@@ -261,12 +260,10 @@ dependencies定义需要的依赖。</p>
 </span><span class='line'>
 </span><span class='line'>      <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
 </span><span class='line'>      <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<pre><code>   3. gradle idea
+<pre><code>3. gradle idea
 </code></pre>
 </div>
 
