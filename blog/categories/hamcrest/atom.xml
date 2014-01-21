@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hamcrest | Bright Shine]]></title>
+  <link href="http://sleefd.github.com/blog/categories/hamcrest/atom.xml" rel="self"/>
+  <link href="http://sleefd.github.com/"/>
+  <updated>2014-01-21T20:02:29+08:00</updated>
+  <id>http://sleefd.github.com/</id>
+  <author>
+    <name><![CDATA[slee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[hamcrest一瞥]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/21/hamcrest/"/>
+    <updated>2014-01-21T19:59:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/21/hamcrest</id>
+    <content type="html"><![CDATA[<p>hamcrest是一个Matcher库，有java版，python,c++版等。它提供了很多比较器用来比较两个对象。其并不是一个测试框架，只是因为Matcher可以在测试断言中用到，而被测试框架和Mock框架集成，比如Junit4,EasyMock.</p>
+
+<p>hamcrest库由两大部分组成:Matcher<T>和Description。<br/>
+Matcher体系定义了常用的比较器，比如equal，not，same等，每个core matcher继承BaseMatcher,实现matches方法来做比较。</p>
+
+<p>Description体系用来描述每个Matcher，输出Matcher错误信息。比如expected: is(..), got: ..。</p>
+
+<!-- more -->
+
+
+<h3>hamcrest core matcher</h3>
+
+<p>参见 org.hamcrest.CoreMatchers<br/>
+anyOf(mathcher1,mather2..):   满足任何一个matcher即为真，参数为matchers  <br/>
+allOf(matcher1,matcher2...): 满足所有matcher，则为真<br/>
+anything(): 永远为真<br/>
+any(class<T>): 任何T类型，则为真
+equalTo(): 是否相等，使用equals比较
+nullValue(): 空值为真
+instanceOf(): 判断是否为某个类的实例<br/>
+is(matcher): 装饰现有matcher，提高代码可读性<br/>
+sameInstance(): 是否为同一实例
+assertThat(actual, is(expected)): junit断言和is，提高readability</p>
+
+<p>{% codeblock hamcrest例子 lang:java%}
+import org.junit.Test;</p>
+
+<p>import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.core.IsAnything.any;
+import static org.junit.Assert.assertThat;</p>
+
+<p>/<em>*
+ * Created by slee on 14-1-21.
+ </em>/
+public class HamcrestTest {</p>
+
+<pre><code>@Test
+public void test_hamcrest_matcher(){
+    String s = "test";
+    //asserts below are all passed
+    assertThat(s ,is("test")); //readable code
+    assertThat(s, equalTo("test") );
+    assertThat(s , is(equalTo("test"))); //readable code
+
+    assertThat(s, is(not("")));
+
+    assertThat(s, notNullValue());
+
+    assertThat(s, any(String.class));
+    assertThat(s, is(any(String.class))); //readable
+    assertThat(s, anyOf(nullValue(), is("test")));
+
+    assertThat(s, allOf(notNullValue(), equalTo("test")));
+
+    assertThat(s, is(instanceOf(String.class)));
+    assertThat(s ,is(sameInstance("test")));
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
+]]></content>
+  </entry>
+  
+</feed>
