@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-21T20:01:42+08:00</updated>
+  <updated>2014-01-21T20:09:03+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -24,6 +24,9 @@
 Matcher体系定义了常用的比较器，比如equal，not，same等，每个core matcher继承BaseMatcher,实现matches方法来做比较。</p>
 
 <p>Description体系用来描述每个Matcher，输出Matcher错误信息。比如expected: is(..), got: ..。</p>
+
+<!-- more -->
+
 
 <h3>hamcrest core matcher</h3>
 

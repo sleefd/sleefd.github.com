@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c++ | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/c-/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-21T20:02:29+08:00</updated>
+  <updated>2014-01-21T20:09:03+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -27,73 +27,122 @@
 <!-- more -->
 
 
-<p>{%codeblock sample.java%}
-Sanner in = new Scanner("in.txt");
-while(in.hasNextLine())
-{</p>
-
-<pre><code>String line = in.nextLine();
-StringTokenizer st = new StringTokenizer(line , ",");
-while(st.haxNext())
-{
-    System.out.print(st.next() + " ");
-}
-System.out.println("");
-</code></pre>
-
-<p>}
-{%endcodeblock%}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sample.java</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Sanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="s">&quot;in.txt&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="k">while</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+</span><span class='line'><span class="n">StringTokenizer</span> <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringTokenizer</span><span class="o">(</span><span class="n">line</span> <span class="o">,</span> <span class="s">&quot;,&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="k">while</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">haxNext</span><span class="o">())</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">next</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>如果是用c++的话，有以下三种做法：</p>
 
 <ol>
 <li>使用cstring头文件中的strtok函数
-{%codeblock split1.cpp%}
-char line[20];
-char delim[] = “,”;
-while(gets(line))
-{
-
-<pre><code>char *p = NULL;
-p = strtok(line, delim );
-while(p!=NULL)
-{
-    cout &lt;&lt; p &lt;&lt; endl;
-    p = strtok(NULL,delim);
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p></li>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>split1.cpp</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+</span><span class='line'><span class="kt">char</span> <span class="n">delim</span><span class="p">[]</span> <span class="o">=</span> <span class="err">“</span><span class="p">,</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">gets</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'><span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">delim</span> <span class="p">);</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">delim</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 <li>使用stdio.h中的sscanf
-{% codeblock split2.cpp%}
-int a,b,c;
-sscanf(line, "%d.%d.%d" ,&amp;a , &amp;b ,&amp;c);
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>split2.cpp</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="n">sscanf</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s">&quot;%d.%d.%d&quot;</span> <span class="p">,</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">a</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">b</span> <span class="p">,</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">c</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 sscanf和sprintf是非常有用的函数，应该善用。</li>
 <li><p>使用strstr()或strchr()或substr()函数<br/>
 用这些函数显然是通过寻找delim出现的位置，来分隔字符串。对delim是单个字符的就比较好写了，多个字符很麻烦吧。<br/>
 还是以解析ip地址为例:
-{%codeblock split3.cpp%}
-char line[20] = "192.168.1";
-char part[10];</p>
-
-<p>char <em>start = line;
-char </em>p ;
-int len = strlen(line);
-line[len] = '.'; //字符串最后补一个delim，方便后面操作
-while((p = strstr(start,"."))!=NULL)
-{</p>
-
-<pre><code> len = p -start;
- strncpy(part,start, len);
- part[len] = '\0';  //strncpy不会自动补'\0'
- start = p+1;
- cout &lt;&lt; part &lt;&lt; endl;
-</code></pre>
-
-<p>}
-{%endcodeblock %}</p></li>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>split3.cpp</span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;192.168.1&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kt">char</span> <span class="n">part</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">char</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">start</span> <span class="o">=</span> <span class="n">line</span><span class="p">;</span>
+</span><span class='line'><span class="kt">char</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p</span> <span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+</span><span class='line'><span class="n">line</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="p">;</span> <span class="c1">//字符串最后补一个delim，方便后面操作</span>
+</span><span class='line'><span class="k">while</span><span class="p">((</span><span class="n">p</span> <span class="o">=</span> <span class="n">strstr</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="s">&quot;.&quot;</span><span class="p">))</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="n">len</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span><span class="n">start</span><span class="p">;</span>
+</span><span class='line'> <span class="n">strncpy</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="n">start</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span><span class='line'> <span class="n">part</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>  <span class="c1">//strncpy不会自动补&#39;\0&#39;</span>
+</span><span class='line'> <span class="n">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'> <span class="n">cout</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">part</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 </ol>
 
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hamcrest | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/hamcrest/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-21T20:02:29+08:00</updated>
+  <updated>2014-01-21T20:09:03+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -42,44 +42,82 @@ is(matcher): 装饰现有matcher，提高代码可读性<br/>
 sameInstance(): 是否为同一实例
 assertThat(actual, is(expected)): junit断言和is，提高readability</p>
 
-<p>{% codeblock hamcrest例子 lang:java%}
-import org.junit.Test;</p>
-
-<p>import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.core.IsAnything.any;
-import static org.junit.Assert.assertThat;</p>
-
-<p>/<em>*
- * Created by slee on 14-1-21.
- </em>/
-public class HamcrestTest {</p>
-
-<pre><code>@Test
-public void test_hamcrest_matcher(){
-    String s = "test";
-    //asserts below are all passed
-    assertThat(s ,is("test")); //readable code
-    assertThat(s, equalTo("test") );
-    assertThat(s , is(equalTo("test"))); //readable code
-
-    assertThat(s, is(not("")));
-
-    assertThat(s, notNullValue());
-
-    assertThat(s, any(String.class));
-    assertThat(s, is(any(String.class))); //readable
-    assertThat(s, anyOf(nullValue(), is("test")));
-
-    assertThat(s, allOf(notNullValue(), equalTo("test")));
-
-    assertThat(s, is(instanceOf(String.class)));
-    assertThat(s ,is(sameInstance("test")));
-}
-</code></pre>
-
-<p>}</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hamcrest例子 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">CoreMatchers</span><span class="o">.*;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">IsAnything</span><span class="o">.</span><span class="na">any</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">em</span><span class="o">&gt;*</span>
+</span><span class='line'> <span class="o">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">slee</span> <span class="n">on</span> <span class="mi">14</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">21</span><span class="o">.</span>
+</span><span class='line'> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HamcrestTest</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_hamcrest_matcher</span><span class="o">(){</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;test&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="c1">//asserts below are all passed</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span> <span class="o">,</span><span class="n">is</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">));</span> <span class="c1">//readable code</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">equalTo</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)</span> <span class="o">);</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span> <span class="o">,</span> <span class="n">is</span><span class="o">(</span><span class="n">equalTo</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)));</span> <span class="c1">//readable code</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">is</span><span class="o">(</span><span class="n">not</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">)));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">notNullValue</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">any</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">is</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)));</span> <span class="c1">//readable</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">anyOf</span><span class="o">(</span><span class="n">nullValue</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">allOf</span><span class="o">(</span><span class="n">notNullValue</span><span class="o">(),</span> <span class="n">equalTo</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">is</span><span class="o">(</span><span class="n">instanceOf</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)));</span>
+</span><span class='line'>    <span class="n">assertThat</span><span class="o">(</span><span class="n">s</span> <span class="o">,</span><span class="n">is</span><span class="o">(</span><span class="n">sameInstance</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)));</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
