@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: junit4 | Bright Shine]]></title>
+  <link href="http://sleefd.github.com/blog/categories/junit4/atom.xml" rel="self"/>
+  <link href="http://sleefd.github.com/"/>
+  <updated>2014-01-21T10:51:03+08:00</updated>
+  <id>http://sleefd.github.com/</id>
+  <author>
+    <name><![CDATA[slee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[junit4可用断言]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/21/junit-assert/"/>
+    <updated>2014-01-21T10:47:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/21/junit-assert</id>
+    <content type="html"><![CDATA[<p>参见junit.org.Assert.java<br/>
+Assert.java包含在单元测试中可使用的所有断言，断言失败产生fail message。<br/>
+该类中的方法都为静态方法，通过静态导入，可增强代码可读性。</p>
+
+<!-- more -->
+
+
+<p>assertEquals( ):比较期望和实际参数是否相等。基本类型直接比较，Object类型调用equals方法比较。</p>
+
+<p>assertSame():  ==比较，比较引用。</p>
+
+<p>assertTrue():   判断bool值是否为真。</p>
+
+<p>assertFalse():  判断bool值是否为假。</p>
+
+<p>assertNull(): 判断参数是否为空。</p>
+
+<p>assertNot~(): 上述所有断言的所有反面断言。</p>
+
+<p><strong>assertThat</strong>():该断言使用了<a href="http://code.google.com/p/hamcrest/">hamcrest</a>提供的Matcher，种类多，可读性强，可取代上述所有断言，建议使用。assertThat(actual, matcher)。比如   assertThat("abc", is("abc"));   <br/>
+assertThat(mylist, is(expectedList));</p>
+]]></content>
+  </entry>
+  
+</feed>
