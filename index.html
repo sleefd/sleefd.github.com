@@ -7,7 +7,8 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content="hamcrest是一个Matcher库，有java版，python,c++版等。它提供了很多比较器用来比较两个对象。其并不是一个测试框架，只是因为Matcher可以在测试断言中用到，而被测试框架和Mock框架集成，比如Junit4,EasyMock. hamcrest库由两大部分组成: &hellip;">
+	<meta name="description" content="当hamcrest matcher无法满足我们需求的时候，需要自己定义matcher. 做法很简单，参照hamcrest.core下面的任何一个Matcher来写就ok. 定义一个Matcher类,extends BaseMatcher
+重写matchers方法。该方法定义比较器的真正逻辑: &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +74,49 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner">
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T12:17:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hamcrest/'>hamcrest</a>, <a class='category' href='/blog/categories/java/'>java</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/01/26/hamcrest-define-matcher/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2014/01/26/hamcrest-define-matcher/">自定义hamcrest Matcher</a></h1>
+	<div class="entry-content">
+		<p>当hamcrest matcher无法满足我们需求的时候，需要自己定义matcher.</p>
+
+<p>做法很简单，参照hamcrest.core下面的任何一个Matcher来写就ok.</p>
+
+<ol>
+<li>定义一个Matcher类,extends BaseMatcher<T></li>
+<li>重写matchers方法。该方法定义比较器的真正逻辑:怎样比较。</li>
+<li>重写describeTo(Description description). 该方法描述这个matcher，可用于输出错误信息。将需要输出的信息append到description上。
+		
+		<a href="/blog/2014/01/26/hamcrest-define-matcher/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -236,50 +280,6 @@ Assert.java包含在单元测试中可使用的所有断言，断言失败产生
 
 		
 		<a href="/blog/2014/01/11/gradle/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-08T12:31:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/thoughts/'>thoughts</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2013/05/08/mind-prejudice/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2013/05/08/mind-prejudice/">思维的偏执</a></h1>
-	<div class="entry-content">
-		<h5>由求m*n网格中矩形的总个数想到的</h5>
-
-<p>这个问题出自微软今年（2013）实习生的笔试题。原题是确定3*4网格中矩形的总个数，答案从5个选项中选一个。一般化之后也就是m*n网格中矩形的总个数是多少。</p>
-
-<p>以下先叙述下我对这个问题的思维求解过程：</p>
-
-<p>看到这个题第一直觉是找规律，应该有一个公式可以直接计算出结果。而找规律的一般做法有两种：一是把原问题分解成几个小问题，求解每个小问题，然后综合得出结果;二是研究几个简单特例，然后从特例中总结出一般规律。这两种做法在考场中我都采用了。</p>
-
-
-		
-		<a href="/blog/2013/05/08/mind-prejudice/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -70,14 +70,18 @@
     </url>
     <url>
         <loc>http://sleefd.github.com/blog/2014/01/21/hamcrest/</loc>
-        <lastmod>2014-01-21T20:02:29+08:00</lastmod>
+        <lastmod>2014-01-26T12:33:31+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sleefd.github.com/blog/2014/01/26/hamcrest-define-matcher/</loc>
+        <lastmod>2014-01-26T12:34:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://sleefd.github.com/blog/archives/</loc>
-        <lastmod>2014-01-21T20:02:29+08:00</lastmod>
+        <lastmod>2014-01-26T12:34:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://sleefd.github.com/</loc>
-        <lastmod>2014-01-21T20:02:29+08:00</lastmod>
+        <lastmod>2014-01-26T12:34:08+08:00</lastmod>
     </url>
 </urlset>

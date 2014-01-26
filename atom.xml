@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-21T20:09:03+08:00</updated>
+  <updated>2014-01-26T12:37:04+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自定义hamcrest matcher]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/26/hamcrest-define-matcher/"/>
+    <updated>2014-01-26T12:17:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/26/hamcrest-define-matcher</id>
+    <content type="html"><![CDATA[<p>当hamcrest matcher无法满足我们需求的时候，需要自己定义matcher.</p>
+
+<p>做法很简单，参照hamcrest.core下面的任何一个Matcher来写就ok.</p>
+
+<ol>
+<li>定义一个Matcher类,extends BaseMatcher<T></li>
+<li>重写matchers方法。该方法定义比较器的真正逻辑:怎样比较。</li>
+<li>重写describeTo(Description description). 该方法描述这个matcher，可用于输出错误信息。将需要输出的信息append到description上。<!--more--></li>
+<li>提供一个工厂方法，用来获取该Matcher对象</li>
+</ol>
+
+
+<p>下面以一个BiggerThan比较器为例，该比较器用来比较两个数字的大小</p>
+
+<figure class='code'><figcaption><span>BiggerThan.java </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.hamcrest.BaseMatcher</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hamcrest.Description</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hamcrest.Matcher</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Created by slee on 14-1-22.</span>
+</span><span class='line'><span class="cm"> * self defined a biggerThan matcher for comparing primitive types.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BiggerThan</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">BaseMatcher</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">object</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">BiggerThan</span><span class="o">(</span><span class="n">T</span> <span class="n">operand</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">object</span> <span class="o">=</span> <span class="n">operand</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">matches</span><span class="o">(</span><span class="n">Object</span> <span class="n">actual</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">actual</span> <span class="k">instanceof</span> <span class="n">Number</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(((</span><span class="n">Number</span><span class="o">)</span> <span class="n">actual</span><span class="o">).</span><span class="na">doubleValue</span><span class="o">()</span> <span class="o">&gt;</span> <span class="o">((</span><span class="n">Number</span><span class="o">)</span> <span class="n">object</span><span class="o">).</span><span class="na">doubleValue</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span> <span class="k">else</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;can&#39;t compare none Number type.&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">describeTo</span><span class="o">(</span><span class="n">Description</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">description</span><span class="o">.</span><span class="na">appendText</span><span class="o">(</span><span class="s">&quot;bigger than &quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">description</span><span class="o">.</span><span class="na">appendValue</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Matcher</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">biggerThan</span><span class="o">(</span><span class="n">T</span> <span class="n">operand</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="n">BiggerThan</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="n">operand</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hamcrest一瞥]]></title>
@@ -110,7 +209,7 @@ assertThat(actual, is(expected)): junit断言和is，提高readability</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<h3>自定义hamcrest matcher</h3>
 ]]></content>
   </entry>
   
