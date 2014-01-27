@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-26T12:44:35+08:00</updated>
+  <updated>2014-01-27T11:31:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[hamcrest IsEqual实现]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/27/ham-isequal/"/>
+    <updated>2014-01-27T11:15:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/27/ham-isequal</id>
+    <content type="html"><![CDATA[<p>学习一下IsEqual类的实现。该Matcher用来比较两个对象是否equal。
+核心逻辑在areEqual()方法内。</p>
+
+<ol>
+<li>首先判断是否都为null</li>
+<li>判断是否为数组。若都是数组，则先比较数组长度是否相等，然后比较数组中元素是否相等，数组元素相等直接递归调用areEqual()方法。因为该数组可能是多维数组，直接调用equals不合理。</li>
+<li>非1，2两种情况直接调用equals()比较。</li>
+</ol>
+
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>areEqual() </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="n">areEqual</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//是否为null</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isArray</span><span class="o">(</span><span class="n">o1</span><span class="o">))</span> <span class="o">{</span> <span class="c1">//是否是数组</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">isArray</span><span class="o">(</span><span class="n">o2</span><span class="o">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="n">areArraysEqual</span><span class="o">(</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">//equals()直接比较</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>mark:</p>
+
+<ol>
+<li><p>判断一个object是否是数组:</p>
+
+<p>object.getClass().isArray() <br/>
+Arrays.equals() /Arrays.deepEquals()比较两个数组是否相同</p></li>
+<li><p>集合类重写了equals方法。比较两个集合是否形同，直接调用equals方法就ok了。只要集合中的元素也重写了equals方法就没有任何问题。</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自定义hamcrest matcher]]></title>
@@ -403,226 +465,6 @@ assertThat(mylist, is(expectedList));</p>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[gradle一瞥]]></title>
-    <link href="http://sleefd.github.com/blog/2014/01/11/gradle/"/>
-    <updated>2014-01-11T22:20:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2014/01/11/gradle</id>
-    <content type="html"><![CDATA[<p>gradle是一个自动化够建工具，用groovy语言编写。
-通过gradle脚本可以一次性完成很多任务，比如编译，测试， 打jar包，多项目管理，依赖管理等等。</p>
-
-<!--more-->
-
-
-<h3>task</h3>
-
-<p>task是gradle脚本定义的，一个项目可以执行的任务。</p>
-
-<p>gradle tasks 查看所有可以执行的任务
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//定义task</span>
-</span><span class='line'><span class="n">task</span> <span class="n">hello</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;&amp;</span><span class="n">lt</span><span class="o">;{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;println &quot;hello world&quot;</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>gradle hello //运行Hello task</p>
-
-<h3>plugin</h3>
-
-<p>plugin是gradle预先设置好的一些task，直接使用plugin就不需要自己code task。
-比如java plugin，可以帮忙完成java代码的编译，测试，打jar包。
-idea plugin，可以把项目打包成idea工程。<br/>
-apply plugin后，gradle tasks查看可使用的task。</p>
-
-<p><strong>使用方法</strong></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//gradle.build</span>
-</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
-</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>常见的plugin有:</p>
-
-<ul>
-<li>java: 提供java源代码编译，测试，运行，打包等功能</li>
-<li>idea: 构建idea工程</li>
-<li>eclipse: 构建eclipse工程</li>
-<li>jetty: 添加jetty服务器支持</li>
-<li>war: web project打包成war包</li>
-</ul>
-
-
-<h3>dependency management</h3>
-
-<p>很多时候项目编译要依赖第三方库，比如测试要使用junit,画图表要用Jfreechart，spring框架需要spring的库等。
-gradle可以管理这些依赖，自动下载需要的库。</p>
-
-<p>repositories定义外部依赖的来源。
-dependencies定义需要的依赖。</p>
-
-<p>声明外部依赖
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
-</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;java&quot;</span>
-</span><span class='line'><span class="n">repositories</span><span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;mavenCentral()</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">dependencies</span><span class="o">{</span>
-</span><span class='line'><span class="n">compile</span> <span class="s2">&quot;com.google.guava:guava:15.0&quot;</span>
-</span><span class='line'><span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h3>gradle wrapper</h3>
-
-<p>wrapper是一个task.当项目成员木有安装gradle时，通过gradle wrapper可以自动下载安装gradle.
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="c1">//build.gradle</span>
-</span><span class='line'><span class="n">task</span> <span class="nf">wrapper</span><span class="o">(</span><span class="nl">type:</span><span class="n">Wrapper</span><span class="o">)</span>
-</span><span class='line'><span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;gradleVersion = &quot;1.4&quot;</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h3>example</h3>
-
-<ul>
-<li><p>java项目</p>
-
-<ol>
-<li><p>创建项目目录,java plugin有约定的项目目录格式:</p>
-
-<p>   src<br/>
-   ----main---java<br/>
-   ----test---java<br/>
-   mkdir src\main\java<br/>
-   mkdir src\main\test</p></li>
-<li><p>build.gradle
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/ol&gt;</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/ul&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;apply plugin: &quot;java&quot;</span>
-</span><span class='line'><span class="s">apply plugin: &quot;idea&quot;</span>
-</span><span class='line'><span class="s">repositories{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">mavenCentral</span><span class="o">()</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span><span class='line'><span class="n">dependencies</span><span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;testCompile &quot;junit:junit:4.8.2&quot;        </span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<pre><code>3. gradle idea  
-  创建idea项目
-</code></pre>
-
-<ul>
-<li><p>spring项目</p>
-
-<ol>
-<li><p>创建项目目录</p>
-
-<p>  src<br/>
-  ---main---java<br/>
-  ---webapp---WEB-INF---pages<br/>
-  ---test---java</p></li>
-<li><p>build.gradle    <br/>
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span>
-</span><span class='line'>  <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;idea&#39;</span>
-</span><span class='line'>  <span class="n">repositories</span><span class="o">{</span>
-</span><span class='line'>  <span class="n">mavenCentral</span><span class="o">()</span>  <span class="o">&lt;</span><span class="n">br</span><span class="s">/&gt;</span>
-</span><span class='line'><span class="s">  }</span>
-</span><span class='line'><span class="s">  dependencies{</span>
-</span><span class='line'><span class="s">  compile &quot;org.springframework:spring-webmvc:3.2.0.RELEASE&quot;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">testCompile</span> <span class="s2">&quot;junit:junit:4.8.2&quot;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
-<li>gradle idea</li>
-</ol>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

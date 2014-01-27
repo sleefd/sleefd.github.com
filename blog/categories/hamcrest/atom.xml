@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hamcrest | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/hamcrest/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-26T12:44:35+08:00</updated>
+  <updated>2014-01-27T11:31:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[hamcrest IsEqual实现]]></title>
+    <link href="http://sleefd.github.com/blog/2014/01/27/ham-isequal/"/>
+    <updated>2014-01-27T11:15:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/01/27/ham-isequal</id>
+    <content type="html"><![CDATA[<p>学习一下IsEqual类的实现。该Matcher用来比较两个对象是否equal。
+核心逻辑在areEqual()方法内。</p>
+
+<ol>
+<li>首先判断是否都为null</li>
+<li>判断是否为数组。若都是数组，则先比较数组长度是否相等，然后比较数组中元素是否相等，数组元素相等直接递归调用areEqual()方法。因为该数组可能是多维数组，直接调用equals不合理。</li>
+<li>非1，2两种情况直接调用equals()比较。</li>
+</ol>
+
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>areEqual() </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="n">areEqual</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//是否为null</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isArray</span><span class="o">(</span><span class="n">o1</span><span class="o">))</span> <span class="o">{</span> <span class="c1">//是否是数组</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">isArray</span><span class="o">(</span><span class="n">o2</span><span class="o">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="n">areArraysEqual</span><span class="o">(</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">//equals()直接比较</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>mark:</p>
+
+<ol>
+<li><p>判断一个object是否是数组:</p>
+
+<p>object.getClass().isArray() <br/>
+Arrays.equals() /Arrays.deepEquals()比较两个数组是否相同</p></li>
+<li><p>集合类重写了equals方法。比较两个集合是否形同，直接调用equals方法就ok了。只要集合中的元素也重写了equals方法就没有任何问题。</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自定义hamcrest matcher]]></title>
