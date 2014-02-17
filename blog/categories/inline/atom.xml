@@ -4,7 +4,7 @@
   <title><![CDATA[Category: inline | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/inline/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-02-17T11:55:58+08:00</updated>
+  <updated>2014-02-17T12:02:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。</p>
 
 <p>inline只是一个建议，是否inline由编译器自己决定。</p>
+
+<!-- more -->
+
 
 <p>inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。</p>
 

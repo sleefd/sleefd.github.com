@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mock | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/mock/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-02-17T11:55:58+08:00</updated>
+  <updated>2014-02-17T12:02:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<h3>mock</h3>
 
 <p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<!--more-->
+
 
 <h3>单一职责原则</h3>
 
