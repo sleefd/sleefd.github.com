@@ -4,7 +4,7 @@
   <title><![CDATA[Bright Shine]]></title>
   <link href="http://sleefd.github.com/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-27T11:34:53+08:00</updated>
+  <updated>2014-02-17T11:55:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[mock和mockito]]></title>
+    <link href="http://sleefd.github.com/blog/2014/02/17/mock/"/>
+    <updated>2014-02-17T11:46:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/02/17/mock</id>
+    <content type="html"><![CDATA[<h3>mock</h3>
+
+<p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<h3>单一职责原则</h3>
+
+<p>单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok，而测试结果不受依赖对象的影响,否则就是集成测试。</p>
+
+<p>比如类A依赖与类B（实际例子中的依赖关系更为复杂）,现在要对类A进行单元测试，可能会面临以下几个问题:</p>
+
+<ol>
+<li>类B并未实现,要测试A，类B必须已被实现。</li>
+<li>类B关联较为复杂的操作，比如数据库访问，socket通信，文件io等等。由于涉及到类B的相关操作，一次单元测试运行需要耗费大量时间，且依赖于外部环境。</li>
+<li>若类B发生改动，将直接影响类A的测试，类A的测试用例需要重新改写。</li>
+</ol>
+
+
+<p>要完成对A的测试，就必须隔离对B的依赖。mock就有用了。mock可以直接模拟现有类或接口，并通过stub为方法指定返回值。这样在接口确定的情况下，对B的任何改动都不会影响A的测试。</p>
+
+<h3>mockito</h3>
+
+<p>mockito是java的一个mock框架，非常好用。</p>
+
+<p>MyMock mockedObject = mock(MyMock.class);  //mock
+when(mockedObject.function()).thenReturn(&#8220;some thing&#8221;);//stub</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[c++ inline]]></title>
+    <link href="http://sleefd.github.com/blog/2014/02/17/inline/"/>
+    <updated>2014-02-17T11:46:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/02/17/inline</id>
+    <content type="html"><![CDATA[<p>inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。</p>
+
+<p>inline只是一个建议，是否inline由编译器自己决定。</p>
+
+<p>inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。</p>
+
+<p>inline的好处：</p>
+
+<ol>
+<li>无函数调用的开销。如栈帧准备，寄存器状态保存，栈帧恢复。</li>
+<li>由于调用点直接扩展，代码在同一区域，由于局部性原理，可以提高instruction cache的命中率。</li>
+<li>代码在同一区域，编译器可以使用其他的优化策略。比如移除死代码，条件分支直接判断，或者将循环不变代码移除循环外等。</li>
+</ol>
+
+
+<p>inline带来的问题：</p>
+
+<ol>
+<li>调用点展开，增加了代码量，cache装不下，会造成cache hit miss及cache replacement的开销。</li>
+<li>代码量大可能增加内存负担，内存放不下，就会依靠虚拟内存，造成thrashing.</li>
+<li>代码挤在同一区域需要存储的变量增多，造成寄存器压力，部分寄存器内容需要存在memory中，导致过多的RAM access，性能下降。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hamcrest IsEqual实现]]></title>
@@ -1685,181 +1750,6 @@ binary distribution 二进制版本即可执行版本，已编译好的，在特
 
 <p>能走不同的路，看不同的风景，有三五好友，还有什么值得追求？<br/>
 有一颗自由的心，且能时刻保持着对万物的兴趣与怜悯，还有什么值得拥有？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress博客搭建中问题汇总及解决方法]]></title>
-    <link href="http://sleefd.github.com/blog/2012/12/28/build-problems/"/>
-    <updated>2012-12-28T20:53:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2012/12/28/build-problems</id>
-    <content type="html"><![CDATA[<ol>
-<li><p>bundle install时，ffi包装不上：</p>
-
-<p>将gemfile.lock文件中所有涉及到ffi版本号的地方都改为ffi (~>1.1.1)<a href="http://michael-roshen.iteye.com/blog/1613151">【参考】</a><!--more--></p></li>
-<li><p>bundle install时，安装某个包提示<code>&gt; ERROR: Failed to build gem native extension.</code></p>
-
-<ul>
-<li><a href="http://rubyinstaller.org/downloads/">安装Devkit</a></li>
-<li>配置环境变量path为devkit下的bin目录</li>
-<li><p>执行代码</p>
-
-<p><code>
-ruby dk.rb init<br/>
-ruby dk.rb install
-</code></p></li>
-</ul>
-</li>
-<li><p>rake generate失败</p>
-
-<ul>
-<li>检查_config.yml，注意每个冒号后面都有空格</li>
-<li>大多数原因是中文解析问题。<br/>
-首先所有的markdown文件应为UTF-8格式，然后修改
-你ruby安装目录下的convertible.rb：<br/>
-<code>
-self.content = File.read(File.join(base, name))改为<br/>
-self.content = File.read(File.join(base, name), :encoding => "UTF-8")
-</code></li>
-</ul>
-</li>
-<li><p>使用模版的方法：<br/>
-RTFM:一定要看模版说明<br/>
-通过修改_config.yml中的相关变量来基于模版个性化自己的博客。</p></li>
-<li><p>使用<code>&lt;!-- more --&gt;</code>来显示post中的部分内容。该标签后的所有内容将不被显示。</p></li>
-<li><p>配置disqus的方法：</p>
-
-<ul>
-<li>注册disqus id，配置与你的站点关联，取一个站点shortname，记住它，很重要。</li>
-<li>设置_config.yml中disqus部分：<br/>
-disqus_short_name: 站点shortname<br/>
-disqus_show_comment_count: true</li>
-</ul>
-</li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mex调用c代码备忘]]></title>
-    <link href="http://sleefd.github.com/blog/2012/12/28/mex/"/>
-    <updated>2012-12-28T16:36:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2012/12/28/mex</id>
-    <content type="html"><![CDATA[<ul>
-<li>目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。</li>
-<li>媒介：mex file
-  有约定俗成的格式，c源文件必须包括头文件 &#8220;mex.h&#8221;, 函数 mexFunction为入口函数.
-  当然也可以使用其他符合c语法的函数，头文件。</li>
-<li>关键： 各种数据类型在matlab和c之间的转换，传递。</li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
-<li>mexFunction的签名为
-<code>
-  void mexFunction( int nlhs,
-   mxArray <em>plhs[],
-   int nrhs,
-   const mxArray </em>prhs[])
-</code>
-参数解释：
-  nlhs: 输出个数
-  nrhs: 输入参数的个数
-  plhs: 指向输出的指针数组
-  prhs: 指向输入的常指针数组</li>
-<li>数据类型：
-  matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。</li>
-<li>基本操作：mx/mex函数
-
-<pre><code>   1. *mx开头*的函数为对数据进行操作的函数.
-      记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以
-      set操作可能会改变workspace中的变量。
-   2. *mex开头*的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。
-</code></pre></li>
-</ul>
-
-
-<h4>代码示例</h4>
-
-<ul>
-<li>c从matlab获得数据
-  获取matrix:
-
-<pre><code>  double *p = mxGetPr(prhs[0]) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。
-  只要参数是matrix(m*n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~
-</code></pre>
-
-  获取维数：
-
-<pre><code>  `mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row &amp;&amp; column 数`
-</code></pre>
-
-<p>  获取cell数据类型：</p></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for(int index = 0 ; index &lt; size  ; ++index)
-</span><span class='line'>      {
-</span><span class='line'>          mxArray * p = mxGetCell(prhs[0] , index); //得到index处的mexArray
-</span><span class='line'>          double *elem = mxGetPr(p);
-</span><span class='line'>      }</span></code></pre></td></tr></table></div></figure>
-
-
-<pre><code>直接获取data（数值
-</code></pre>
-
-<p>`       double *data;</p>
-
-<pre><code>    data = mxGetData(prhs[0]);
-    //mxSetData(p1hs[0] , data);
-    `
-</code></pre>
-
-<ul>
-<li>c返回数据给matlab
-
-<pre><code>workspace输出：mexPrintf,类似c printf函数。  mexPrintf("%d\n" , number);
-               mexErrMsgTxt,打印error消息。 mexErrMsgTxt("This is an error message.");
-               mexEvalString,在workspace中调用string指定的命令。 mexEvalString("plot([1:5])"); //plot命令会被执行
-</code></pre>
-
-   想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。
-
-<pre><code>  分配空间的方法 1 plhs[0] = mxCreateDoubleMatrix(m,n,mxReal);
-                  double *data = mxGetPr(plhs[0]); //and then you can assign values to data.
-                 2 利用mxMalloc (用法类似c malloc
-                  double *data = mxMalloc(sizeof(double) * num);
-                      ... //assign values
-                  mxSetPr(prhs , data);
-</code></pre></li>
-<li>动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree
-
-<pre><code>       虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.
-</code></pre></li>
-</ul>
-
-
-<p>配置mex file编译环境在matlab中：</p>
-
-<pre><code>直接在命令行下输入 mex -setup 选择合适的编译器就ok了。
-</code></pre>
-
-<p>调试：可在VS中采用附加进程调试</p>
-
-<p>有价值的资料：</p>
-
-<pre><code>1. apiext.pdf //matlab external interface 
-2. mexguide.pdf 
-</code></pre>
 ]]></content>
   </entry>
   

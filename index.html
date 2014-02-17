@@ -7,9 +7,8 @@
 	<meta name="author" content="slee">
 
 	
-	<meta name="description" content="学习一下IsEqual类的实现。该Matcher用来比较两个对象是否equal。
-核心逻辑在areEqual()方法内。 首先判断是否都为null
-判断是否为数组。若都是数组，则先比较数组长度是否相等，然后比较数组中元素是否相等，数组元素相等直接递归调用areEqual()方法。 &hellip;">
+	<meta name="description" content="mock mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。 单一职责原则 单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +74,127 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner">
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-17T11:46:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/mock/'>mock</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/02/17/mock/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2014/02/17/mock/">Mock和mockito</a></h1>
+	<div class="entry-content">
+		<h3>mock</h3>
+
+<p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<h3>单一职责原则</h3>
+
+<p>单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok，而测试结果不受依赖对象的影响,否则就是集成测试。</p>
+
+<p>比如类A依赖与类B（实际例子中的依赖关系更为复杂）,现在要对类A进行单元测试，可能会面临以下几个问题:</p>
+
+<ol>
+<li>类B并未实现,要测试A，类B必须已被实现。</li>
+<li>类B关联较为复杂的操作，比如数据库访问，socket通信，文件io等等。由于涉及到类B的相关操作，一次单元测试运行需要耗费大量时间，且依赖于外部环境。</li>
+<li>若类B发生改动，将直接影响类A的测试，类A的测试用例需要重新改写。</li>
+</ol>
+
+
+<p>要完成对A的测试，就必须隔离对B的依赖。mock就有用了。mock可以直接模拟现有类或接口，并通过stub为方法指定返回值。这样在接口确定的情况下，对B的任何改动都不会影响A的测试。</p>
+
+<h3>mockito</h3>
+
+<p>mockito是java的一个mock框架，非常好用。</p>
+
+<p>MyMock mockedObject = mock(MyMock.class);  //mock
+when(mockedObject.function()).thenReturn(&#8220;some thing&#8221;);//stub</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-17T11:46:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/c-/'>c++</a>, <a class='category' href='/blog/categories/inline/'>inline</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/02/17/inline/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2014/02/17/inline/">C++ Inline</a></h1>
+	<div class="entry-content">
+		<p>inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。</p>
+
+<p>inline只是一个建议，是否inline由编译器自己决定。</p>
+
+<p>inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。</p>
+
+<p>inline的好处：</p>
+
+<ol>
+<li>无函数调用的开销。如栈帧准备，寄存器状态保存，栈帧恢复。</li>
+<li>由于调用点直接扩展，代码在同一区域，由于局部性原理，可以提高instruction cache的命中率。</li>
+<li>代码在同一区域，编译器可以使用其他的优化策略。比如移除死代码，条件分支直接判断，或者将循环不变代码移除循环外等。</li>
+</ol>
+
+
+<p>inline带来的问题：</p>
+
+<ol>
+<li>调用点展开，增加了代码量，cache装不下，会造成cache hit miss及cache replacement的开销。</li>
+<li>代码量大可能增加内存负担，内存放不下，就会依靠虚拟内存，造成thrashing.</li>
+<li>代码挤在同一区域需要存储的变量增多，造成寄存器压力，部分寄存器内容需要存在memory中，导致过多的RAM access，性能下降。</li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -204,90 +324,6 @@ Matcher体系定义了常用的比较器，比如equal，not，same等，每个c
 
 		
 		<a href="/blog/2014/01/21/hamcrest/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-21T10:47:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/junit4/'>junit4</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2014/01/21/junit-assert/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2014/01/21/junit-assert/">Junit4可用断言</a></h1>
-	<div class="entry-content">
-		<p>参见junit.org.Assert.java<br/>
-Assert.java包含在单元测试中可使用的所有断言，断言失败产生fail message。<br/>
-该类中的方法都为静态方法，通过静态导入，可增强代码可读性。</p>
-
-
-		
-		<a href="/blog/2014/01/21/junit-assert/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-20T20:31:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/design-pattern/'>design pattern</a>, <a class='category' href='/blog/categories/java/'>java</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2014/01/20/adapter-model/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2014/01/20/adapter-model/">适配器模式</a></h1>
-	<div class="entry-content">
-		<h4>什么是适配器</h4>
-
-<p>以常见的电源适配器为例：比如手机的充电器
-，笔记本电脑的电源。日常供电电压是220v,手机充电器将日常电压转
-化成手机能用的电压（5v左右）,手机才能冲进电。
-香港的笔记本电压是110v,而大陆的电压是220v,如果要让香港的笔记本电脑能在大陆充电要怎么做呢？
-需要一个适配器将220v的电压输入转为110v输出，如此笔记本电脑才能充电。</p>
-
-
-		
-		<a href="/blog/2014/01/20/adapter-model/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

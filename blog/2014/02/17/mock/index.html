@@ -1,0 +1,167 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mock和mockito - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="mock mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。 单一职责原则 单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2014/02/17/mock/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Mock和mockito</h1>
+	<div class="entry-content"><h3>mock</h3>
+
+<p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<h3>单一职责原则</h3>
+
+<p>单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok，而测试结果不受依赖对象的影响,否则就是集成测试。</p>
+
+<p>比如类A依赖与类B（实际例子中的依赖关系更为复杂）,现在要对类A进行单元测试，可能会面临以下几个问题:</p>
+
+<ol>
+<li>类B并未实现,要测试A，类B必须已被实现。</li>
+<li>类B关联较为复杂的操作，比如数据库访问，socket通信，文件io等等。由于涉及到类B的相关操作，一次单元测试运行需要耗费大量时间，且依赖于外部环境。</li>
+<li>若类B发生改动，将直接影响类A的测试，类A的测试用例需要重新改写。</li>
+</ol>
+
+
+<p>要完成对A的测试，就必须隔离对B的依赖。mock就有用了。mock可以直接模拟现有类或接口，并通过stub为方法指定返回值。这样在接口确定的情况下，对B的任何改动都不会影响A的测试。</p>
+
+<h3>mockito</h3>
+
+<p>mockito是java的一个mock框架，非常好用。</p>
+
+<p>MyMock mockedObject = mock(MyMock.class);  //mock
+when(mockedObject.function()).thenReturn(&#8220;some thing&#8221;);//stub</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2014/02/17/mock/';
+        var disqus_url = 'http://sleefd.github.com/blog/2014/02/17/mock/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

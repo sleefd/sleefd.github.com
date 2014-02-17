@@ -1,0 +1,163 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>c++ inline - Bright Shine</title>
+	<meta name="author" content="slee">
+
+	
+	<meta name="description" content="inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。 inline只是一个建议，是否inline由编译器自己决定。 inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Bright Shine" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://sleefd.github.com/blog/2014/02/17/inline/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div>
+<h1><a href="/">Bright Shine</a></h1>
+<p class="subtitle"></p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+<section class="aboutme">
+  <p>
+   A master of software engineering. Focusing on data mining. <br/>many interests,enjoy games like LOL && DOTA
+   
+  </p>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/sleefd" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">C++ Inline</h1>
+	<div class="entry-content"><p>inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。</p>
+
+<p>inline只是一个建议，是否inline由编译器自己决定。</p>
+
+<p>inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。</p>
+
+<p>inline的好处：</p>
+
+<ol>
+<li>无函数调用的开销。如栈帧准备，寄存器状态保存，栈帧恢复。</li>
+<li>由于调用点直接扩展，代码在同一区域，由于局部性原理，可以提高instruction cache的命中率。</li>
+<li>代码在同一区域，编译器可以使用其他的优化策略。比如移除死代码，条件分支直接判断，或者将循环不变代码移除循环外等。</li>
+</ol>
+
+
+<p>inline带来的问题：</p>
+
+<ol>
+<li>调用点展开，增加了代码量，cache装不下，会造成cache hit miss及cache replacement的开销。</li>
+<li>代码量大可能增加内存负担，内存放不下，就会依靠虚拟内存，造成thrashing.</li>
+<li>代码挤在同一区域需要存储的变量增多，造成寄存器压力，部分寄存器内容需要存在memory中，导致过多的RAM access，性能下降。</li>
+</ol>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    slee
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'sleeblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sleefd.github.com/blog/2014/02/17/inline/';
+        var disqus_url = 'http://sleefd.github.com/blog/2014/02/17/inline/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

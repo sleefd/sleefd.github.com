@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c++ | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/c-/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-27T11:34:53+08:00</updated>
+  <updated>2014-02-17T11:55:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[c++ inline]]></title>
+    <link href="http://sleefd.github.com/blog/2014/02/17/inline/"/>
+    <updated>2014-02-17T11:46:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/02/17/inline</id>
+    <content type="html"><![CDATA[<p>inline申明某个函数为内联展开，提示编译器所有该函数的调用可以直接在调用点展开，而不需要进行堆栈调用。</p>
+
+<p>inline只是一个建议，是否inline由编译器自己决定。</p>
+
+<p>inline函数的调用，直接在该函数所有调用点插入调用函数体，无需进行函数调用的控制转移，堆栈开销，因此较为高效。</p>
+
+<p>inline的好处：</p>
+
+<ol>
+<li>无函数调用的开销。如栈帧准备，寄存器状态保存，栈帧恢复。</li>
+<li>由于调用点直接扩展，代码在同一区域，由于局部性原理，可以提高instruction cache的命中率。</li>
+<li>代码在同一区域，编译器可以使用其他的优化策略。比如移除死代码，条件分支直接判断，或者将循环不变代码移除循环外等。</li>
+</ol>
+
+
+<p>inline带来的问题：</p>
+
+<ol>
+<li>调用点展开，增加了代码量，cache装不下，会造成cache hit miss及cache replacement的开销。</li>
+<li>代码量大可能增加内存负担，内存放不下，就会依靠虚拟内存，造成thrashing.</li>
+<li>代码挤在同一区域需要存储的变量增多，造成寄存器压力，部分寄存器内容需要存在memory中，导致过多的RAM access，性能下降。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[c++字符串分割]]></title>

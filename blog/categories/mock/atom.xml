@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mock | Bright Shine]]></title>
+  <link href="http://sleefd.github.com/blog/categories/mock/atom.xml" rel="self"/>
+  <link href="http://sleefd.github.com/"/>
+  <updated>2014-02-17T11:55:58+08:00</updated>
+  <id>http://sleefd.github.com/</id>
+  <author>
+    <name><![CDATA[slee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[mock和mockito]]></title>
+    <link href="http://sleefd.github.com/blog/2014/02/17/mock/"/>
+    <updated>2014-02-17T11:46:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/02/17/mock</id>
+    <content type="html"><![CDATA[<h3>mock</h3>
+
+<p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<h3>单一职责原则</h3>
+
+<p>单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok，而测试结果不受依赖对象的影响,否则就是集成测试。</p>
+
+<p>比如类A依赖与类B（实际例子中的依赖关系更为复杂）,现在要对类A进行单元测试，可能会面临以下几个问题:</p>
+
+<ol>
+<li>类B并未实现,要测试A，类B必须已被实现。</li>
+<li>类B关联较为复杂的操作，比如数据库访问，socket通信，文件io等等。由于涉及到类B的相关操作，一次单元测试运行需要耗费大量时间，且依赖于外部环境。</li>
+<li>若类B发生改动，将直接影响类A的测试，类A的测试用例需要重新改写。</li>
+</ol>
+
+
+<p>要完成对A的测试，就必须隔离对B的依赖。mock就有用了。mock可以直接模拟现有类或接口，并通过stub为方法指定返回值。这样在接口确定的情况下，对B的任何改动都不会影响A的测试。</p>
+
+<h3>mockito</h3>
+
+<p>mockito是java的一个mock框架，非常好用。</p>
+
+<p>MyMock mockedObject = mock(MyMock.class);  //mock
+when(mockedObject.function()).thenReturn("some thing");//stub</p>
+]]></content>
+  </entry>
+  
+</feed>

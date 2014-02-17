@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Bright Shine]]></title>
   <link href="http://sleefd.github.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://sleefd.github.com/"/>
-  <updated>2014-01-27T11:34:53+08:00</updated>
+  <updated>2014-02-17T11:55:58+08:00</updated>
   <id>http://sleefd.github.com/</id>
   <author>
     <name><![CDATA[slee]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[mock和mockito]]></title>
+    <link href="http://sleefd.github.com/blog/2014/02/17/mock/"/>
+    <updated>2014-02-17T11:46:00+08:00</updated>
+    <id>http://sleefd.github.com/blog/2014/02/17/mock</id>
+    <content type="html"><![CDATA[<h3>mock</h3>
+
+<p>mock是单元测试中处理依赖关系的一种手段，可翻译为模拟，也可解释为替代。它用虚拟的对象代替实际的对象，来隔离类间依赖对单元测试的影响。</p>
+
+<h3>单一职责原则</h3>
+
+<p>单元测试要遵守单一职责原则，即每个测试只测试一个类的一个功能。
+每次单元测试的结果应该能准确反应被测对象或功能是否ok，而测试结果不受依赖对象的影响,否则就是集成测试。</p>
+
+<p>比如类A依赖与类B（实际例子中的依赖关系更为复杂）,现在要对类A进行单元测试，可能会面临以下几个问题:</p>
+
+<ol>
+<li>类B并未实现,要测试A，类B必须已被实现。</li>
+<li>类B关联较为复杂的操作，比如数据库访问，socket通信，文件io等等。由于涉及到类B的相关操作，一次单元测试运行需要耗费大量时间，且依赖于外部环境。</li>
+<li>若类B发生改动，将直接影响类A的测试，类A的测试用例需要重新改写。</li>
+</ol>
+
+
+<p>要完成对A的测试，就必须隔离对B的依赖。mock就有用了。mock可以直接模拟现有类或接口，并通过stub为方法指定返回值。这样在接口确定的情况下，对B的任何改动都不会影响A的测试。</p>
+
+<h3>mockito</h3>
+
+<p>mockito是java的一个mock框架，非常好用。</p>
+
+<p>MyMock mockedObject = mock(MyMock.class);  //mock
+when(mockedObject.function()).thenReturn("some thing");//stub</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hamcrest IsEqual实现]]></title>
@@ -323,148 +357,6 @@ Assert.java包含在单元测试中可使用的所有断言，断言失败产生
 
 <p>assertThat("abc", is("abc"));   <br/>
 assertThat(mylist, is(expectedList));</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[适配器模式]]></title>
-    <link href="http://sleefd.github.com/blog/2014/01/20/adapter-model/"/>
-    <updated>2014-01-20T20:31:00+08:00</updated>
-    <id>http://sleefd.github.com/blog/2014/01/20/adapter-model</id>
-    <content type="html"><![CDATA[<h4>什么是适配器</h4>
-
-<p>以常见的电源适配器为例：比如手机的充电器
-，笔记本电脑的电源。日常供电电压是220v,手机充电器将日常电压转
-化成手机能用的电压（5v左右）,手机才能冲进电。
-香港的笔记本电压是110v,而大陆的电压是220v,如果要让香港的笔记本电脑能在大陆充电要怎么做呢？
-需要一个适配器将220v的电压输入转为110v输出，如此笔记本电脑才能充电。</p>
-
-<!-- more -->
-
-
-<p>因此适配器是一个转换器，将一种输入转化成另一种输出，将一个接口转化成另一个接口，
-以较小的代价实现功能的复用。</p>
-
-<h4>适配器模式及好处</h4>
-
-<p>适配器模式是常见的设计模式之一。通过将现有接口转化成另一个需要的接口，
-可以复用第三方组件或现有功能模块，避免重复功能的开发。</p>
-
-<h4>适配器模式的实现方法</h4>
-
-<p>使用适配器模式的目的是提供一个可用的接口。<br/>
-因此需要一个接口类，定义我们需要的接口；<br/>
-接着需要一个类实现这个接口，提供必须功能。这个类通常被称为Adapter。<br/>
-当然还有一个类已经提供了我们所需功能的部分实现，需要被复用，称为Adaptee.<br/>
-关键是Adapter如何复用Adaptee的功能。方法有两种：</p>
-
-<ul>
-<li>Adapter继承Adaptee<br/>
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">interface</span> <span class="nc">Functions</span>
-</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kt">void</span> <span class="n">f</span><span class="o">();</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">class</span> <span class="nc">Adaptee</span>
-</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kt">void</span> <span class="n">f</span><span class="o">(</span><span class="kt">int</span> <span class="o">)</span>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="c1">//do something....</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">class</span> <span class="nc">Adapter</span> <span class="kd">extends</span> <span class="n">Adaptee</span> <span class="kd">implements</span> <span class="n">Functions</span>
-</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kt">void</span> <span class="n">f</span><span class="o">()</span>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">f</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ul>
-<li>Adapter引用Adaptee类，包含一个Adaptee对象成员
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">class</span> <span class="nc">Adapter</span> <span class="kd">implements</span> <span class="n">functions</span>
-</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">private</span> <span class="n">Adaptee</span> <span class="n">obj</span><span class="o">;</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">f</span><span class="o">()</span>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="n">obj</span><span class="o">.</span><span class="na">f</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
